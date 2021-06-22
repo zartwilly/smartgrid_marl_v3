@@ -53,7 +53,7 @@ def balanced_player_game_4_random_mode(arr_pl_M_T_vars_modif, t,
         
         # get mode_i
         mode_i = None
-        if algo_name == fct_aux.ALGO_DET[0]:                                    # Systematic-DETERMINIST
+        if algo_name == fct_aux.ALGO_NAMES_DET[0]:                                    # Systematic-DETERMINIST
             if state_i == fct_aux.STATES[0]:
                 mode_i = fct_aux.STATE1_STRATS[0]                               # CONS+, Deficit
             elif state_i == fct_aux.STATES[1]:
@@ -174,7 +174,7 @@ def determinist_balanced_player_game(arr_pl_M_T_vars_init,
                                      pi_hp_minus=0.33,
                                      a=1, b=1,
                                      gamma_version=1,
-                                     algo_name=fct_aux.ALGO_DET[0],
+                                     algo_name=fct_aux.ALGO_NAMES_DET[0],
                                      used_storage=False,
                                      path_to_save="tests", 
                                      manual_debug=False, dbg=False):
