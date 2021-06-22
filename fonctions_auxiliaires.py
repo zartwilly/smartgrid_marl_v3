@@ -63,7 +63,8 @@ INDEX_ATTRS = {"Ci":0, "Pi":1, "Si":2, "Si_max":3, "gamma_i":4,
 NON_PLAYING_PLAYERS = {"PLAY":1, "NOT_PLAY":0}
 ALGO_NAMES_BF = ["BEST-BRUTE-FORCE", "BAD-BRUTE-FORCE", "MIDDLE-BRUTE-FORCE"]
 ALGO_NAMES_NASH = ["BEST-NASH", "BAD-NASH", "MIDDLE-NASH"]
-ALGO_DET = ["Selfish-DETERMINIST", "Systematic-DETERMINIST"]
+ALGO_NAMES_DET = ["Selfish-DETERMINIST", "Systematic-DETERMINIST"]
+ALGO_NAMES_LRIx = ["LRI1", "LRI2"]
 
 # manual debug constants
 MANUEL_DBG_GAMMA_I = np.random.randint(low=2, high=21, size=1)[0]              #5
