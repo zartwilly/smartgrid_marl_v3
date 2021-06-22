@@ -8610,7 +8610,7 @@ def checkout_values_Pi_Ci_arr_pl_SETAB1B2C_doc23(arr_pl_M_T_vars_init,
                 cpt_t_Simax_ok += 1 if Si_max in Sis_max else 0
                 cpt_t_Si_nok += 1 if Si_max not in Sis_max else 0
             elif setX == SET_AB1B2C[1]:                                        # setB1
-                Pis = [8,12]; Cis = [10]; Sis = [4]; Sis_max=[10]
+                Pis = [8,12]; Cis = [10]; Sis = [4]; Sis_max=[6]
                 Cis = [10] if scenario_name == "scenario2" else [12]
                 nb_setB1_t += 1
                 cpt_t_Pi_ok += 1 if Pi >= Pis[0] and Pi <= Pis[1] else 0
