@@ -191,11 +191,11 @@ def possibles_modes_players_automate(arr_pl_M_T_K_vars, t=0, k=0):
                                   AUTOMATE_INDEX_ATTRS["state_i"]] 
             
             # get mode_i
-            if state_i == "Deficit":
+            if state_i == STATES[0]:                                            # Deficit
                 possibles_modes.append(STATE1_STRATS)
-            elif state_i == "Self":
+            elif state_i == STATES[1]:                                          # Self
                 possibles_modes.append(STATE2_STRATS)
-            elif state_i == "Surplus":
+            elif state_i == STATES[2]:                                          # Surplus
                 possibles_modes.append(STATE3_STRATS)
             # print("3: num_pl_i={}, state_i = {}".format(num_pl_i, state_i))
                 
@@ -206,11 +206,11 @@ def possibles_modes_players_automate(arr_pl_M_T_K_vars, t=0, k=0):
                                   AUTOMATE_INDEX_ATTRS["state_i"]]
             
             # get mode_i
-            if state_i == "Deficit":
+            if state_i == STATES[0]:                                           # Deficit
                 possibles_modes.append(STATE1_STRATS)
-            elif state_i == "Self":
+            elif state_i == STATES[1]:                                         # Self
                 possibles_modes.append(STATE2_STRATS)
-            elif state_i == "Surplus":
+            elif state_i == STATES[2]:                                          # Surplus
                 possibles_modes.append(STATE3_STRATS)
             # print("4: num_pl_i={}, state_i = {}".format(num_pl_i, state_i))
     else:
@@ -10193,7 +10193,7 @@ def compute_gamma_state_4_period_t(arr_pl_M_T_K_vars, t,
         
         gamma_i, gamma_i_min, gamma_i_max, gamma_i_mid  = None, None, None, None
         res_mid = None
-        pi_t = None
+        ppi_t = None
         if manual_debug:
             gamma_i_min = MANUEL_DBG_GAMMA_I
             gamma_i_mid = MANUEL_DBG_GAMMA_I
@@ -10211,7 +10211,7 @@ def compute_gamma_state_4_period_t(arr_pl_M_T_K_vars, t,
             dif_Si_plus_minus = Si_t_plus - Si_t_minus
             frac = dif_pos_Ci_Pi_t_plus_1_Si_t_minus / dif_Si_plus_minus \
                     if dif_Si_plus_minus != 0 else 0
-            pi_t = np.sqrt(min(frac, 1))
+            ppi_t = np.sqrt(min(frac, 1))
             
             if Si_t_plus_1 < Si_t_minus:
                 # Xi - 1
@@ -10302,7 +10302,19 @@ def compute_gamma_state_4_period_t(arr_pl_M_T_K_vars, t,
         
         elif gamma_version == 5:
             rd_draw = np.random.uniform(low=0.0, high=1.0, size=None)
-            rho_i_t = 1 if rd_draw < pi_t else 0
+            rho_i_t = 1 if rd_draw < ppi_t else 0
+            gamma_i = rho_i_t * (X_gamV5 + 1)
+            variables = [("Si", Si), ("state_i", state_i), ("gamma_i", gamma_i), 
+                         ("Si_minus", Si_t_minus), ("Si_plus", Si_t_plus)]
+            arr_pl_M_T_K_vars = update_variables(
+                                    arr_pl_M_T_K_vars, variables, shape_arr_pl,
+                                    num_pl_i, t, k, gamma_i, Si,
+                                    pi_0_minus, pi_0_plus, 
+                                    pi_hp_minus_t, pi_hp_plus_t, dbg)
+        elif gamma_version == -2:
+            ppi_t = 0.8
+            rd_draw = np.random.uniform(low=0.0, high=1.0, size=None)
+            rho_i_t = 1 if rd_draw < ppi_t else 0
             gamma_i = rho_i_t * (X_gamV5 + 1)
             variables = [("Si", Si), ("state_i", state_i), ("gamma_i", gamma_i), 
                          ("Si_minus", Si_t_minus), ("Si_plus", Si_t_plus)]
