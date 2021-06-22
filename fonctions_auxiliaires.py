@@ -811,7 +811,8 @@ def save_variables(path_to_save, arr_pl_M_T_K_vars,
                    b0_s_T_K, c0_s_T_K,
                    B_is_M, C_is_M, B_is_M_T, C_is_M_T,
                    BENs_M_T_K, CSTs_M_T_K, 
-                   BB_is_M, CC_is_M, RU_is_M, BB_is_M_T, CC_is_M_T, RU_is_M_T,
+                   BB_is_M, CC_is_M, EB_is_M, 
+                   BB_is_M_T, CC_is_M_T, EB_is_M_T,
                    dico_EB_R_EBsetA1B1_EBsetB2C,
                    pi_sg_minus_T_K, pi_sg_plus_T_K, 
                    pi_0_minus_T_K, pi_0_plus_T_K,
@@ -851,11 +852,11 @@ def save_variables(path_to_save, arr_pl_M_T_K_vars,
     np.save(os.path.join(path_to_save, "CSTs_M_T_K.npy"), CSTs_M_T_K)
     np.save(os.path.join(path_to_save, "BB_is_M.npy"), BB_is_M)
     np.save(os.path.join(path_to_save, "CC_is_M.npy"), CC_is_M)
-    np.save(os.path.join(path_to_save, "RU_is_M.npy"), RU_is_M)
+    np.save(os.path.join(path_to_save, "EB_is_M.npy"), EB_is_M)
     
     np.save(os.path.join(path_to_save, "BB_is_M_T.npy"), BB_is_M_T)
     np.save(os.path.join(path_to_save, "CC_is_M_T.npy"), CC_is_M_T)
-    np.save(os.path.join(path_to_save, "RU_is_M_T.npy"), RU_is_M_T)
+    np.save(os.path.join(path_to_save, "EB_is_M_T.npy"), EB_is_M_T)
     
     np.save(os.path.join(path_to_save, "pi_sg_minus_T_K.npy"), pi_sg_minus_T_K)
     np.save(os.path.join(path_to_save, "pi_sg_plus_T_K.npy"), pi_sg_plus_T_K)
