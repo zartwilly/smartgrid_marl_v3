@@ -73,253 +73,254 @@ def envoie_mail_with_pieces_jointes(message, subject, path_files):
 ###############################################################################
 
 def generate_arr_M_T_vars(doc_VALUES, dico_scenario, 
-                          setA_m_players_0, setC_m_players_0,
-                          setA_m_players_12, setB1_m_players_12, 
-                          setB2_m_players_12, setC_m_players_12, 
+                          setA_m_players_1, setC_m_players_1,
+                          setA_m_players_23, setB1_m_players_23, 
+                          setB2_m_players_23, setC_m_players_23, 
                           t_periods,
                           path_to_arr_pl_M_T, used_instances):
     
-    dico_012 = {}
+    dico_123 = {}
     if doc_VALUES==15:
         for scenario_name, scenario in dico_scenario.items():
-            if scenario_name in ["scenario1", "scenario2"]:
+            if scenario_name in ["scenario2", "scenario3"]:
                 arr_pl_M_T_vars_init \
                     = fct_aux.get_or_create_instance_Pi_Ci_etat_AUTOMATE_SETAB1B2C_doc15(
-                                setA_m_players_12, setB1_m_players_12, 
-                                setB2_m_players_12, setC_m_players_12, 
+                                setA_m_players_23, setB1_m_players_23, 
+                                setB2_m_players_23, setC_m_players_23, 
                                 t_periods, 
                                 dico_scenario[scenario_name],
                                 scenario_name,
                                 path_to_arr_pl_M_T, used_instances)
-                dico_012[scenario_name] = arr_pl_M_T_vars_init
+                dico_123[scenario_name] = arr_pl_M_T_vars_init
             else:
                 arr_pl_M_T_vars_init \
                     = fct_aux.get_or_create_instance_Pi_Ci_etat_AUTOMATE_SETAC(
-                            setA_m_players_0, setC_m_players_0, 
+                            setA_m_players_1, setC_m_players_1, 
                             t_periods, 
                             dico_scenario[scenario_name],
                             scenario_name,
                             path_to_arr_pl_M_T, used_instances)
-                dico_012[scenario_name] = arr_pl_M_T_vars_init
+                dico_123[scenario_name] = arr_pl_M_T_vars_init
     elif doc_VALUES==16:
         for scenario_name, scenario in dico_scenario.items():
-            if scenario_name in ["scenario1", "scenario2"]:
+            if scenario_name in ["scenario2", "scenario3"]:
                 arr_pl_M_T_vars_init \
                     = fct_aux.get_or_create_instance_Pi_Ci_etat_AUTOMATE_SETAB1B2C_doc16(
-                                setA_m_players_12, setB1_m_players_12, 
-                                setB2_m_players_12, setC_m_players_12, 
+                                setA_m_players_23, setB1_m_players_23, 
+                                setB2_m_players_23, setC_m_players_23, 
                                 t_periods, 
                                 dico_scenario[scenario_name],
                                 scenario_name,
                                 path_to_arr_pl_M_T, used_instances)
-                dico_012[scenario_name] = arr_pl_M_T_vars_init
+                dico_123[scenario_name] = arr_pl_M_T_vars_init
             else:
                 arr_pl_M_T_vars_init \
                     = fct_aux.get_or_create_instance_Pi_Ci_etat_AUTOMATE_SETAC(
-                            setA_m_players_0, setC_m_players_0, 
+                            setA_m_players_1, setC_m_players_1, 
                             t_periods, 
                             dico_scenario[scenario_name],
                             scenario_name,
                             path_to_arr_pl_M_T, used_instances)
-                dico_012[scenario_name] = arr_pl_M_T_vars_init
+                dico_123[scenario_name] = arr_pl_M_T_vars_init
     elif doc_VALUES==17:
         for scenario_name, scenario in dico_scenario.items():
             print("scenario_name={}, scenario={}".format(scenario_name, dico_scenario[scenario_name]))
-            if scenario_name in ["scenario1", "scenario2"]:
+            if scenario_name in ["scenario2", "scenario3"]:
                 arr_pl_M_T_vars_init \
                     = fct_aux.get_or_create_instance_Pi_Ci_etat_AUTOMATE_SETAB1B2C_doc17(
-                                setA_m_players_12, setB1_m_players_12, 
-                                setB2_m_players_12, setC_m_players_12, 
+                                setA_m_players_23, setB1_m_players_23, 
+                                setB2_m_players_23, setC_m_players_23, 
                                 t_periods, 
                                 dico_scenario[scenario_name],
                                 scenario_name,
                                 path_to_arr_pl_M_T, used_instances)
-                dico_012[scenario_name] = arr_pl_M_T_vars_init
+                dico_123[scenario_name] = arr_pl_M_T_vars_init
             else:
                 arr_pl_M_T_vars_init \
                     = fct_aux.get_or_create_instance_Pi_Ci_etat_AUTOMATE_SETAC(
-                            setA_m_players_0, setC_m_players_0, 
+                            setA_m_players_1, setC_m_players_1, 
                             t_periods, 
                             dico_scenario[scenario_name],
                             scenario_name,
                             path_to_arr_pl_M_T, used_instances)
-                dico_012[scenario_name] = arr_pl_M_T_vars_init
+                dico_123[scenario_name] = arr_pl_M_T_vars_init
     elif doc_VALUES==18:
         for scenario_name, scenario in dico_scenario.items():
             print("scenario_name={}, scenario={}".format(scenario_name, dico_scenario[scenario_name]))
-            if scenario_name in ["scenario1"]:
+            if scenario_name in ["scenario2"]:
                 arr_pl_M_T_vars_init \
                     = fct_aux.get_or_create_instance_Pi_Ci_etat_AUTOMATE_SETAB1B2C_doc18(
-                                setA_m_players_12, setB1_m_players_12, 
-                                setB2_m_players_12, setC_m_players_12, 
+                                setA_m_players_23, setB1_m_players_23, 
+                                setB2_m_players_23, setC_m_players_23, 
                                 t_periods, 
                                 dico_scenario[scenario_name],
                                 scenario_name,
                                 path_to_arr_pl_M_T, used_instances)
-                dico_012[scenario_name] = arr_pl_M_T_vars_init
-            elif scenario_name in ["scenario2"]:
+                dico_123[scenario_name] = arr_pl_M_T_vars_init
+            elif scenario_name in ["scenario3"]:
                 arr_pl_M_T_vars_init \
                     = fct_aux.get_or_create_instance_Pi_Ci_etat_AUTOMATE_SETAB1B2C_doc17(
-                                setA_m_players_12, setB1_m_players_12, 
-                                setB2_m_players_12, setC_m_players_12, 
+                                setA_m_players_23, setB1_m_players_23, 
+                                setB2_m_players_23, setC_m_players_23, 
                                 t_periods, 
                                 dico_scenario[scenario_name],
                                 scenario_name,
                                 path_to_arr_pl_M_T, used_instances)
-                dico_012[scenario_name] = arr_pl_M_T_vars_init
+                dico_123[scenario_name] = arr_pl_M_T_vars_init
             else:
                 arr_pl_M_T_vars_init \
                     = fct_aux.get_or_create_instance_Pi_Ci_etat_AUTOMATE_SETAC(
-                            setA_m_players_0, setC_m_players_0, 
+                            setA_m_players_1, setC_m_players_1, 
                             t_periods, 
                             dico_scenario[scenario_name],
                             scenario_name,
                             path_to_arr_pl_M_T, used_instances)
-                dico_012[scenario_name] = arr_pl_M_T_vars_init
+                dico_123[scenario_name] = arr_pl_M_T_vars_init
     elif doc_VALUES==19:
         for scenario_name, scenario in dico_scenario.items():
             print("scenario_name={}, scenario={}".format(scenario_name, dico_scenario[scenario_name]))
-            if scenario_name in ["scenario1"]:
+            if scenario_name in ["scenario2"]:
                 arr_pl_M_T_vars_init \
                     = fct_aux.get_or_create_instance_Pi_Ci_etat_AUTOMATE_SETAB1B2C_doc19(
-                                setA_m_players_12, setB1_m_players_12, 
-                                setB2_m_players_12, setC_m_players_12, 
+                                setA_m_players_23, setB1_m_players_23, 
+                                setB2_m_players_23, setC_m_players_23, 
                                 t_periods, 
                                 dico_scenario[scenario_name],
                                 scenario_name,
                                 path_to_arr_pl_M_T, used_instances)
-                dico_012[scenario_name] = arr_pl_M_T_vars_init
-            elif scenario_name in ["scenario2"]:
+                dico_123[scenario_name] = arr_pl_M_T_vars_init
+            elif scenario_name in ["scenario3"]:
                 arr_pl_M_T_vars_init \
                     = fct_aux.get_or_create_instance_Pi_Ci_etat_AUTOMATE_SETAB1B2C_doc17(
-                                setA_m_players_12, setB1_m_players_12, 
-                                setB2_m_players_12, setC_m_players_12, 
+                                setA_m_players_23, setB1_m_players_23, 
+                                setB2_m_players_23, setC_m_players_23, 
                                 t_periods, 
                                 dico_scenario[scenario_name],
                                 scenario_name,
                                 path_to_arr_pl_M_T, used_instances)
-                dico_012[scenario_name] = arr_pl_M_T_vars_init
+                dico_123[scenario_name] = arr_pl_M_T_vars_init
             else:
                 arr_pl_M_T_vars_init \
                     = fct_aux.get_or_create_instance_Pi_Ci_etat_AUTOMATE_SETAC(
-                            setA_m_players_0, setC_m_players_0, 
+                            setA_m_players_1, setC_m_players_1, 
                             t_periods, 
                             dico_scenario[scenario_name],
                             scenario_name,
                             path_to_arr_pl_M_T, used_instances)
-                dico_012[scenario_name] = arr_pl_M_T_vars_init             
+                dico_123[scenario_name] = arr_pl_M_T_vars_init             
     elif doc_VALUES==20:
         for scenario_name, scenario in dico_scenario.items():
             print("scenario_name={}, scenario={}".format(scenario_name, dico_scenario[scenario_name]))
-            if scenario_name in ["scenario1"]:
+            if scenario_name in ["scenario2"]:
                 arr_pl_M_T_vars_init \
                     = fct_aux.get_or_create_instance_Pi_Ci_etat_AUTOMATE_SETAB1B2C_doc20(
-                                setA_m_players_12, setB1_m_players_12, 
-                                setB2_m_players_12, setC_m_players_12, 
+                                setA_m_players_23, setB1_m_players_23, 
+                                setB2_m_players_23, setC_m_players_23, 
                                 t_periods, 
                                 dico_scenario[scenario_name],
                                 scenario_name,
                                 path_to_arr_pl_M_T, used_instances)
-                dico_012[scenario_name] = arr_pl_M_T_vars_init
-            elif scenario_name in ["scenario2"]:
+                dico_123[scenario_name] = arr_pl_M_T_vars_init
+            elif scenario_name in ["scenario3"]:
                 arr_pl_M_T_vars_init \
                     = fct_aux.get_or_create_instance_Pi_Ci_etat_AUTOMATE_SETAB1B2C_doc17(
-                                setA_m_players_12, setB1_m_players_12, 
-                                setB2_m_players_12, setC_m_players_12, 
+                                setA_m_players_23, setB1_m_players_23, 
+                                setB2_m_players_23, setC_m_players_23, 
                                 t_periods, 
                                 dico_scenario[scenario_name],
                                 scenario_name,
                                 path_to_arr_pl_M_T, used_instances)
-                dico_012[scenario_name] = arr_pl_M_T_vars_init
+                dico_123[scenario_name] = arr_pl_M_T_vars_init
             else:
                 arr_pl_M_T_vars_init \
                     = fct_aux.get_or_create_instance_Pi_Ci_etat_AUTOMATE_SETAC(
-                            setA_m_players_0, setC_m_players_0, 
+                            setA_m_players_1, setC_m_players_1, 
                             t_periods, 
                             dico_scenario[scenario_name],
                             scenario_name,
                             path_to_arr_pl_M_T, used_instances)
-                dico_012[scenario_name] = arr_pl_M_T_vars_init
+                dico_123[scenario_name] = arr_pl_M_T_vars_init
     elif doc_VALUES==22:
         for scenario_name, scenario in dico_scenario.items():
             print("scenario_name={}, scenario={}".format(scenario_name, dico_scenario[scenario_name]))
-            if scenario_name in ["scenario1"]:
+            if scenario_name in ["scenario2"]:
                 arr_pl_M_T_vars_init \
                     = fct_aux.get_or_create_instance_Pi_Ci_etat_AUTOMATE_SETAB1B2C_doc20(
-                                setA_m_players_12, setB1_m_players_12, 
-                                setB2_m_players_12, setC_m_players_12, 
+                                setA_m_players_23, setB1_m_players_23, 
+                                setB2_m_players_23, setC_m_players_23, 
                                 t_periods, 
                                 dico_scenario[scenario_name],
                                 scenario_name,
                                 path_to_arr_pl_M_T, used_instances)
-                dico_012[scenario_name] = arr_pl_M_T_vars_init
-            elif scenario_name in ["scenario2"]:
+                dico_123[scenario_name] = arr_pl_M_T_vars_init
+            elif scenario_name in ["scenario3"]:
                 arr_pl_M_T_vars_init \
                     = fct_aux.get_or_create_instance_Pi_Ci_etat_AUTOMATE_SETAB1B2C_doc17(
-                                setA_m_players_12, setB1_m_players_12, 
-                                setB2_m_players_12, setC_m_players_12, 
+                                setA_m_players_23, setB1_m_players_23, 
+                                setB2_m_players_23, setC_m_players_23, 
                                 t_periods, 
                                 dico_scenario[scenario_name],
                                 scenario_name,
                                 path_to_arr_pl_M_T, used_instances)
-                dico_012[scenario_name] = arr_pl_M_T_vars_init
+                dico_123[scenario_name] = arr_pl_M_T_vars_init
             else:
                 arr_pl_M_T_vars_init \
                     = fct_aux.get_or_create_instance_Pi_Ci_etat_AUTOMATE_SETAC(
-                            setA_m_players_0, setC_m_players_0, 
+                            setA_m_players_1, setC_m_players_1, 
                             t_periods, 
                             dico_scenario[scenario_name],
                             scenario_name,
                             path_to_arr_pl_M_T, used_instances)
-                dico_012[scenario_name] = arr_pl_M_T_vars_init
+                dico_123[scenario_name] = arr_pl_M_T_vars_init
     elif doc_VALUES==23:
          for scenario_name, scenario in dico_scenario.items():
             print("scenario_name={}, scenario={}".format(scenario_name, dico_scenario[scenario_name]))
             if scenario_name in ["scenario1"]:
                 arr_pl_M_T_vars_init \
                     = fct_aux.get_or_create_instance_Pi_Ci_etat_AUTOMATE_SETAC_doc23(
-                            setA_m_players_0, setC_m_players_0, 
+                            setA_m_players_1, setC_m_players_1, 
                             t_periods, 
                             scenario,
                             scenario_name,
                             path_to_arr_pl_M_T, used_instances)
-                dico_012[scenario_name] = arr_pl_M_T_vars_init
+                dico_123[scenario_name] = arr_pl_M_T_vars_init
             elif scenario_name in ["scenario2", "scenario3"]:
                 arr_pl_M_T_vars_init \
                     = fct_aux.get_or_create_instance_Pi_Ci_etat_AUTOMATE_SETAB1B2C_doc23(
-                        setA_m_players_12, setB1_m_players_12, 
-                        setB2_m_players_12, setC_m_players_12, 
+                        setA_m_players_23, setB1_m_players_23, 
+                        setB2_m_players_23, setC_m_players_23, 
                         t_periods, 
                         scenario,
                         scenario_name,
                         path_to_arr_pl_M_T, used_instances)
+                dico_123[scenario_name] = arr_pl_M_T_vars_init
         
-    return arr_pl_M_T_vars_init, dico_012
+    return arr_pl_M_T_vars_init, dico_123
 
 if __name__ == "__main__":
     ti = time.time()
     debug = False
     
     # ---- initialization of variables for generating instances ----
-    setA_m_players_12 = 10; setB1_m_players_12 = 3; 
-    setB2_m_players_12 = 5; setC_m_players_12 = 8;                             # 26 players
-    setA_m_players_0 = 10; setC_m_players_0 = 10;                              # 20 players
+    setA_m_players_23 = 10; setB1_m_players_23 = 3; 
+    setB2_m_players_23 = 5; setC_m_players_23 = 8;                             # 26 players
+    setA_m_players_1 = 10; setC_m_players_1 = 10;                              # 20 players
    
     # _____                     scenarios --> debut                 __________
-    doc_VALUES = 22 #17 #19; # 15: doc version 15, 16: doc version 16, 17: doc version 17, 18: doc version 18 only scenario1, 19: valeurs données par reunion ZOOM "fait le point" 
+    doc_VALUES = 23 #17 #19; # 15: doc version 15, 16: doc version 16, 17: doc version 17, 18: doc version 18 only scenario1, 19: valeurs données par reunion ZOOM "fait le point" 
     dico_scenario = None
     root_doc_VALUES = None
     if doc_VALUES == 15:
         prob_A_A = 0.6; prob_A_C = 0.4;
         prob_C_A = 0.4; prob_C_C = 0.6;
-        scenario0 = [(prob_A_A, prob_A_C), 
+        scenario1 = [(prob_A_A, prob_A_C), 
                     (prob_C_A, prob_C_C)] 
         
         prob_A_A = 0.6; prob_A_B1 = 0.4; prob_A_B2 = 0.0; prob_A_C = 0.0;
         prob_B1_A = 0.6; prob_B1_B1 = 0.4; prob_B1_B2 = 0.0; prob_B1_C = 0.0;
         prob_B2_A = 0.0; prob_B2_B1 = 0.0; prob_B2_B2 = 0.4; prob_B2_C = 0.6;
         prob_C_A = 0.0; prob_C_B1 = 0.0; prob_C_B2 = 0.4; prob_C_C = 0.6 
-        scenario1 = [(prob_A_A, prob_A_B1, prob_A_B2, prob_A_C), 
+        scenario2 = [(prob_A_A, prob_A_B1, prob_A_B2, prob_A_C), 
                      (prob_B1_A, prob_B1_B1, prob_B1_B2, prob_B1_C),
                      (prob_B2_A, prob_B2_B1, prob_B2_B2, prob_B2_C),
                      (prob_C_A, prob_C_B1, prob_C_B2, prob_C_C)]
@@ -328,27 +329,27 @@ if __name__ == "__main__":
         prob_B1_A = 0.8; prob_B1_B1 = 0.2; prob_B1_B2 = 0.0; prob_B1_C = 0.0;
         prob_B2_A = 0.0; prob_B2_B1 = 0.0; prob_B2_B2 = 0.2; prob_B2_C = 0.8;
         prob_C_A = 0.0; prob_C_B1 = 0.0; prob_C_B2 = 0.2; prob_C_C = 0.8
-        scenario2 = [(prob_A_A, prob_A_B1, prob_A_B2, prob_A_C), 
+        scenario3 = [(prob_A_A, prob_A_B1, prob_A_B2, prob_A_C), 
                      (prob_B1_A, prob_B1_B1, prob_B1_B2, prob_B1_C),
                      (prob_B2_A, prob_B2_B1, prob_B2_B2, prob_B2_C),
                      (prob_C_A, prob_C_B1, prob_C_B2, prob_C_C)]
         
         root_doc_VALUES = "Doc{}".format(doc_VALUES)
-        scenario_names = {"scenario0", "scenario1", "scenario2"}
-        dico_scenario = {"scenario0": scenario0,
-                         "scenario1": scenario1, 
-                         "scenario2": scenario2}
+        scenario_names = {"scenario1", "scenario2", "scenario3"}
+        dico_scenario = {"scenario1": scenario1,
+                         "scenario2": scenario2, 
+                         "scenario3": scenario3}
     elif doc_VALUES == 16:
         prob_A_A = 0.6; prob_A_C = 0.4;
         prob_C_A = 0.4; prob_C_C = 0.6;
-        scenario0 = [(prob_A_A, prob_A_C), 
+        scenario1 = [(prob_A_A, prob_A_C), 
                     (prob_C_A, prob_C_C)] 
         
         prob_A_A = 0.4; prob_A_B1 = 0.6; prob_A_B2 = 0.0; prob_A_C = 0.0;
         prob_B1_A = 0.4; prob_B1_B1 = 0.6; prob_B1_B2 = 0.0; prob_B1_C = 0.0;
         prob_B2_A = 0.0; prob_B2_B1 = 0.0; prob_B2_B2 = 0.5; prob_B2_C = 0.5;
         prob_C_A = 0.0; prob_C_B1 = 0.0; prob_C_B2 = 0.5; prob_C_C = 0.5 
-        scenario1 = [(prob_A_A, prob_A_B1, prob_A_B2, prob_A_C), 
+        scenario2 = [(prob_A_A, prob_A_B1, prob_A_B2, prob_A_C), 
                      (prob_B1_A, prob_B1_B1, prob_B1_B2, prob_B1_C),
                      (prob_B2_A, prob_B2_B1, prob_B2_B2, prob_B2_C),
                      (prob_C_A, prob_C_B1, prob_C_B2, prob_C_C)]
@@ -357,32 +358,32 @@ if __name__ == "__main__":
         prob_B1_A = 0.8; prob_B1_B1 = 0.2; prob_B1_B2 = 0.0; prob_B1_C = 0.0;
         prob_B2_A = 0.0; prob_B2_B1 = 0.0; prob_B2_B2 = 0.2; prob_B2_C = 0.8;
         prob_C_A = 0.0; prob_C_B1 = 0.0; prob_C_B2 = 0.8; prob_C_C = 0.2
-        scenario2 = [(prob_A_A, prob_A_B1, prob_A_B2, prob_A_C), 
+        scenario3 = [(prob_A_A, prob_A_B1, prob_A_B2, prob_A_C), 
                      (prob_B1_A, prob_B1_B1, prob_B1_B2, prob_B1_C),
                      (prob_B2_A, prob_B2_B1, prob_B2_B2, prob_B2_C),
                      (prob_C_A, prob_C_B1, prob_C_B2, prob_C_C)]
         
         root_doc_VALUES = "Doc{}".format(doc_VALUES)
-        scenario_names = {"scenario0", "scenario1", "scenario2"}
-        dico_scenario = {"scenario0": scenario0,
-                         "scenario1": scenario1, 
-                         "scenario2": scenario2}
+        scenario_names = {"scenario1", "scenario2", "scenario3"}
+        dico_scenario = {"scenario1": scenario1,
+                         "scenario2": scenario2, 
+                         "scenario3": scenario3}
     elif doc_VALUES == 17:
         
-        setA_m_players_12 = 8; setB1_m_players_12 = 5; 
-        setB2_m_players_12 = 5; setC_m_players_12 = 8;                         # 26 players
-        setA_m_players_0 = 10; setC_m_players_0 = 10;                          # 20 players
+        setA_m_players_23 = 8; setB1_m_players_23 = 5; 
+        setB2_m_players_23 = 5; setC_m_players_23 = 8;                         # 26 players
+        setA_m_players_1 = 10; setC_m_players_1 = 10;                          # 20 players
             
         prob_A_A = 0.6; prob_A_C = 0.4;
         prob_C_A = 0.4; prob_C_C = 0.6;
-        scenario0 = [(prob_A_A, prob_A_C), 
+        scenario1 = [(prob_A_A, prob_A_C), 
                     (prob_C_A, prob_C_C)] 
         
         prob_A_A = 0.4; prob_A_B1 = 0.6; prob_A_B2 = 0.0; prob_A_C = 0.0;
         prob_B1_A = 0.4; prob_B1_B1 = 0.6; prob_B1_B2 = 0.0; prob_B1_C = 0.0;
         prob_B2_A = 0.0; prob_B2_B1 = 0.0; prob_B2_B2 = 0.5; prob_B2_C = 0.5;
         prob_C_A = 0.0; prob_C_B1 = 0.0; prob_C_B2 = 0.5; prob_C_C = 0.5 
-        scenario1 = [(prob_A_A, prob_A_B1, prob_A_B2, prob_A_C), 
+        scenario2 = [(prob_A_A, prob_A_B1, prob_A_B2, prob_A_C), 
                      (prob_B1_A, prob_B1_B1, prob_B1_B2, prob_B1_C),
                      (prob_B2_A, prob_B2_B1, prob_B2_B2, prob_B2_C),
                      (prob_C_A, prob_C_B1, prob_C_B2, prob_C_C)]
@@ -391,32 +392,32 @@ if __name__ == "__main__":
         prob_B1_A = 0.8; prob_B1_B1 = 0.2; prob_B1_B2 = 0.0; prob_B1_C = 0.0;
         prob_B2_A = 0.0; prob_B2_B1 = 0.0; prob_B2_B2 = 0.2; prob_B2_C = 0.8;
         prob_C_A = 0.0; prob_C_B1 = 0.0; prob_C_B2 = 0.8; prob_C_C = 0.2
-        scenario2 = [(prob_A_A, prob_A_B1, prob_A_B2, prob_A_C), 
+        scenario3 = [(prob_A_A, prob_A_B1, prob_A_B2, prob_A_C), 
                      (prob_B1_A, prob_B1_B1, prob_B1_B2, prob_B1_C),
                      (prob_B2_A, prob_B2_B1, prob_B2_B2, prob_B2_C),
                      (prob_C_A, prob_C_B1, prob_C_B2, prob_C_C)]
         
         root_doc_VALUES = "Doc{}".format(doc_VALUES)
-        scenario_names = {"scenario0", "scenario1", "scenario2"}
-        dico_scenario = {"scenario0": scenario0,
-                         "scenario1": scenario1, 
-                         "scenario2": scenario2}
+        scenario_names = {"scenario1", "scenario2", "scenario3"}
+        dico_scenario = {"scenario1": scenario1,
+                         "scenario2": scenario2, 
+                         "scenario3": scenario3}
     elif doc_VALUES == 18:
         
-        setA_m_players_12 = 8; setB1_m_players_12 = 5; 
-        setB2_m_players_12 = 5; setC_m_players_12 = 8;                         # 26 players
-        setA_m_players_0 = 10; setC_m_players_0 = 10;                          # 20 players
+        setA_m_players_23 = 8; setB1_m_players_23 = 5; 
+        setB2_m_players_23 = 5; setC_m_players_23 = 8;                         # 26 players
+        setA_m_players_1 = 10; setC_m_players_1 = 10;                          # 20 players
             
         prob_A_A = 0.6; prob_A_C = 0.4;
         prob_C_A = 0.4; prob_C_C = 0.6;
-        scenario0 = [(prob_A_A, prob_A_C), 
+        scenario1 = [(prob_A_A, prob_A_C), 
                     (prob_C_A, prob_C_C)] 
         
         prob_A_A = 0.5; prob_A_B1 = 0.5; prob_A_B2 = 0.0; prob_A_C = 0.0;
         prob_B1_A = 0.5; prob_B1_B1 = 0.5; prob_B1_B2 = 0.0; prob_B1_C = 0.0;
         prob_B2_A = 0.0; prob_B2_B1 = 0.0; prob_B2_B2 = 0.5; prob_B2_C = 0.5;
         prob_C_A = 0.0; prob_C_B1 = 0.0; prob_C_B2 = 0.5; prob_C_C = 0.5 
-        scenario1 = [(prob_A_A, prob_A_B1, prob_A_B2, prob_A_C), 
+        scenario2 = [(prob_A_A, prob_A_B1, prob_A_B2, prob_A_C), 
                      (prob_B1_A, prob_B1_B1, prob_B1_B2, prob_B1_C),
                      (prob_B2_A, prob_B2_B1, prob_B2_B2, prob_B2_C),
                      (prob_C_A, prob_C_B1, prob_C_B2, prob_C_C)]
@@ -425,29 +426,29 @@ if __name__ == "__main__":
         prob_B1_A = 0.8; prob_B1_B1 = 0.2; prob_B1_B2 = 0.0; prob_B1_C = 0.0;
         prob_B2_A = 0.0; prob_B2_B1 = 0.0; prob_B2_B2 = 0.2; prob_B2_C = 0.8;
         prob_C_A = 0.0; prob_C_B1 = 0.0; prob_C_B2 = 0.8; prob_C_C = 0.2
-        scenario2 = [(prob_A_A, prob_A_B1, prob_A_B2, prob_A_C), 
+        scenario3 = [(prob_A_A, prob_A_B1, prob_A_B2, prob_A_C), 
                      (prob_B1_A, prob_B1_B1, prob_B1_B2, prob_B1_C),
                      (prob_B2_A, prob_B2_B1, prob_B2_B2, prob_B2_C),
                      (prob_C_A, prob_C_B1, prob_C_B2, prob_C_C)]
         
         root_doc_VALUES = "Doc{}".format(doc_VALUES)
-        scenario_names = {"scenario1"}
-        dico_scenario = {"scenario1": scenario1}
+        scenario_names = {"scenario2"}
+        dico_scenario = {"scenario2": scenario2}
     elif doc_VALUES == 19:
-        setA_m_players_12 = 8; setB1_m_players_12 = 5; 
-        setB2_m_players_12 = 5; setC_m_players_12 = 8;                         # 26 players
-        setA_m_players_0 = 10; setC_m_players_0 = 10;                          # 20 players
+        setA_m_players_23 = 8; setB1_m_players_23 = 5; 
+        setB2_m_players_23 = 5; setC_m_players_23 = 8;                         # 26 players
+        setA_m_players_1 = 10; setC_m_players_1 = 10;                          # 20 players
             
         prob_A_A = 0.6; prob_A_C = 0.4;
         prob_C_A = 0.4; prob_C_C = 0.6;
-        scenario0 = [(prob_A_A, prob_A_C), 
+        scenario1 = [(prob_A_A, prob_A_C), 
                     (prob_C_A, prob_C_C)] 
         
         prob_A_A = 0.5; prob_A_B1 = 0.5; prob_A_B2 = 0.0; prob_A_C = 0.0;
         prob_B1_A = 0.5; prob_B1_B1 = 0.5; prob_B1_B2 = 0.0; prob_B1_C = 0.0;
         prob_B2_A = 0.0; prob_B2_B1 = 0.0; prob_B2_B2 = 0.5; prob_B2_C = 0.5;
         prob_C_A = 0.0; prob_C_B1 = 0.0; prob_C_B2 = 0.5; prob_C_C = 0.5 
-        scenario1 = [(prob_A_A, prob_A_B1, prob_A_B2, prob_A_C), 
+        scenario2 = [(prob_A_A, prob_A_B1, prob_A_B2, prob_A_C), 
                      (prob_B1_A, prob_B1_B1, prob_B1_B2, prob_B1_C),
                      (prob_B2_A, prob_B2_B1, prob_B2_B2, prob_B2_C),
                      (prob_C_A, prob_C_B1, prob_C_B2, prob_C_C)]
@@ -456,31 +457,31 @@ if __name__ == "__main__":
         prob_B1_A = 0.8; prob_B1_B1 = 0.2; prob_B1_B2 = 0.0; prob_B1_C = 0.0;
         prob_B2_A = 0.0; prob_B2_B1 = 0.0; prob_B2_B2 = 0.2; prob_B2_C = 0.8;
         prob_C_A = 0.0; prob_C_B1 = 0.0; prob_C_B2 = 0.8; prob_C_C = 0.2
-        scenario2 = [(prob_A_A, prob_A_B1, prob_A_B2, prob_A_C), 
+        scenario3 = [(prob_A_A, prob_A_B1, prob_A_B2, prob_A_C), 
                      (prob_B1_A, prob_B1_B1, prob_B1_B2, prob_B1_C),
                      (prob_B2_A, prob_B2_B1, prob_B2_B2, prob_B2_C),
                      (prob_C_A, prob_C_B1, prob_C_B2, prob_C_C)]
         
         root_doc_VALUES = "Doc{}".format(doc_VALUES)
-        scenario_names = {"scenario0", "scenario1", "scenario2"}
-        dico_scenario = {"scenario0": scenario0,
-                         "scenario1": scenario1, 
-                         "scenario2": scenario2}
+        scenario_names = {"scenario1", "scenario2", "scenario3"}
+        dico_scenario = {"scenario1": scenario1,
+                         "scenario2": scenario2, 
+                         "scenario3": scenario3}
     elif doc_VALUES == 20:
-        setA_m_players_12 = 8; setB1_m_players_12 = 5; 
-        setB2_m_players_12 = 5; setC_m_players_12 = 8;                         # 26 players
-        setA_m_players_0 = 10; setC_m_players_0 = 10;                          # 20 players
+        setA_m_players_23 = 8; setB1_m_players_23 = 5; 
+        setB2_m_players_23 = 5; setC_m_players_23 = 8;                         # 26 players
+        setA_m_players_1 = 10; setC_m_players_1 = 10;                          # 20 players
             
         prob_A_A = 0.6; prob_A_C = 0.4;
         prob_C_A = 0.4; prob_C_C = 0.6;
-        scenario0 = [(prob_A_A, prob_A_C), 
+        scenario1 = [(prob_A_A, prob_A_C), 
                     (prob_C_A, prob_C_C)] 
         
         prob_A_A = 0.5; prob_A_B1 = 0.5; prob_A_B2 = 0.0; prob_A_C = 0.0;
         prob_B1_A = 0.5; prob_B1_B1 = 0.5; prob_B1_B2 = 0.0; prob_B1_C = 0.0;
         prob_B2_A = 0.0; prob_B2_B1 = 0.0; prob_B2_B2 = 0.5; prob_B2_C = 0.5;
         prob_C_A = 0.0; prob_C_B1 = 0.0; prob_C_B2 = 0.5; prob_C_C = 0.5 
-        scenario1 = [(prob_A_A, prob_A_B1, prob_A_B2, prob_A_C), 
+        scenario2 = [(prob_A_A, prob_A_B1, prob_A_B2, prob_A_C), 
                      (prob_B1_A, prob_B1_B1, prob_B1_B2, prob_B1_C),
                      (prob_B2_A, prob_B2_B1, prob_B2_B2, prob_B2_C),
                      (prob_C_A, prob_C_B1, prob_C_B2, prob_C_C)]
@@ -489,31 +490,31 @@ if __name__ == "__main__":
         prob_B1_A = 0.8; prob_B1_B1 = 0.2; prob_B1_B2 = 0.0; prob_B1_C = 0.0;
         prob_B2_A = 0.0; prob_B2_B1 = 0.0; prob_B2_B2 = 0.2; prob_B2_C = 0.8;
         prob_C_A = 0.0; prob_C_B1 = 0.0; prob_C_B2 = 0.8; prob_C_C = 0.2
-        scenario2 = [(prob_A_A, prob_A_B1, prob_A_B2, prob_A_C), 
+        scenario3 = [(prob_A_A, prob_A_B1, prob_A_B2, prob_A_C), 
                      (prob_B1_A, prob_B1_B1, prob_B1_B2, prob_B1_C),
                      (prob_B2_A, prob_B2_B1, prob_B2_B2, prob_B2_C),
                      (prob_C_A, prob_C_B1, prob_C_B2, prob_C_C)]
         
         root_doc_VALUES = "Doc{}".format(doc_VALUES)
-        scenario_names = {"scenario0", "scenario1", "scenario2"}
-        dico_scenario = {"scenario0": scenario0,
-                         "scenario1": scenario1, 
-                         "scenario2": scenario2}   
+        scenario_names = {"scenario1", "scenario2", "scenario3"}
+        dico_scenario = {"scenario1": scenario1,
+                         "scenario2": scenario2, 
+                         "scenario3": scenario3}   
     elif doc_VALUES == 22:
-        setA_m_players_12 = 8; setB1_m_players_12 = 5; 
-        setB2_m_players_12 = 5; setC_m_players_12 = 8;                         # 26 players
-        setA_m_players_0 = 10; setC_m_players_0 = 10;                          # 20 players
+        setA_m_players_23 = 8; setB1_m_players_23 = 5; 
+        setB2_m_players_23 = 5; setC_m_players_23 = 8;                         # 26 players
+        setA_m_players_1 = 10; setC_m_players_1 = 10;                          # 20 players
             
         prob_A_A = 0.6; prob_A_C = 0.4;
         prob_C_A = 0.4; prob_C_C = 0.6;
-        scenario0 = [(prob_A_A, prob_A_C), 
+        scenario1 = [(prob_A_A, prob_A_C), 
                     (prob_C_A, prob_C_C)] 
         
         prob_A_A = 0.5; prob_A_B1 = 0.5; prob_A_B2 = 0.0; prob_A_C = 0.0;
         prob_B1_A = 0.5; prob_B1_B1 = 0.5; prob_B1_B2 = 0.0; prob_B1_C = 0.0;
         prob_B2_A = 0.0; prob_B2_B1 = 0.0; prob_B2_B2 = 0.5; prob_B2_C = 0.5;
         prob_C_A = 0.0; prob_C_B1 = 0.0; prob_C_B2 = 0.5; prob_C_C = 0.5 
-        scenario1 = [(prob_A_A, prob_A_B1, prob_A_B2, prob_A_C), 
+        scenario2 = [(prob_A_A, prob_A_B1, prob_A_B2, prob_A_C), 
                      (prob_B1_A, prob_B1_B1, prob_B1_B2, prob_B1_C),
                      (prob_B2_A, prob_B2_B1, prob_B2_B2, prob_B2_C),
                      (prob_C_A, prob_C_B1, prob_C_B2, prob_C_C)]
@@ -522,20 +523,20 @@ if __name__ == "__main__":
         prob_B1_A = 0.8; prob_B1_B1 = 0.2; prob_B1_B2 = 0.0; prob_B1_C = 0.0;
         prob_B2_A = 0.0; prob_B2_B1 = 0.0; prob_B2_B2 = 0.2; prob_B2_C = 0.8;
         prob_C_A = 0.0; prob_C_B1 = 0.0; prob_C_B2 = 0.8; prob_C_C = 0.2
-        scenario2 = [(prob_A_A, prob_A_B1, prob_A_B2, prob_A_C), 
+        scenario3 = [(prob_A_A, prob_A_B1, prob_A_B2, prob_A_C), 
                      (prob_B1_A, prob_B1_B1, prob_B1_B2, prob_B1_C),
                      (prob_B2_A, prob_B2_B1, prob_B2_B2, prob_B2_C),
                      (prob_C_A, prob_C_B1, prob_C_B2, prob_C_C)]
         
         root_doc_VALUES = "Doc{}".format(doc_VALUES)
-        scenario_names = {"scenario0", "scenario1", "scenario2"}
-        dico_scenario = {"scenario0": scenario0,
-                         "scenario1": scenario1, 
-                         "scenario2": scenario2}
+        scenario_names = {"scenario1", "scenario2", "scenario3"}
+        dico_scenario = {"scenario1": scenario1,
+                         "scenario2": scenario2, 
+                         "scenario3": scenario3}
     elif doc_VALUES == 23:
-        setA_m_players_0 = 10; setC_m_players_0 = 10;                           # 20 joueurs
-        setA_m_players_12 = 10; setB1_m_players_12 = 3; 
-        setB2_m_players_12 = 5; setC_m_players_12 = 8;                          # 26 joueurs
+        setA_m_players_1 = 10; setC_m_players_1 = 10;                           # 20 joueurs
+        setA_m_players_23 = 8; setB1_m_players_23 = 5; 
+        setB2_m_players_23 = 5; setC_m_players_23 = 8;                          # 26 joueurs
         
         prob_scen1 = 0.6; scenario1_name = "scenario1"
         prob_A_A = prob_scen1; prob_A_C = 1-prob_scen1;
@@ -593,7 +594,7 @@ if __name__ == "__main__":
     learning_rates = None
     date_hhmm, Visualisation = None, None
     used_storage_det=True
-    used_instances=True
+    used_instances= True
     criteria_bf="Perf_t" # "In_sg_Out_sg"
     dbg_234_players = None
     arr_pl_M_T_vars_init = None
@@ -608,7 +609,7 @@ if __name__ == "__main__":
         t_periods = 50 #20 #50 #10 #30 #50 #30 #35 #55 #117 #15 #3
         k_steps = 250 #250 #250 #5 #100 #250 #5000 #2000 #50 #250
         NB_REPEAT_K_MAX= 10 #3 #15 #30
-        learning_rates = [0.1]#[0.1] #[0.001]#[0.00001] #[0.01] #[0.0001]
+        learning_rates = [0.01]#[0.1] #[0.001]#[0.00001] #[0.01] #[0.0001]
         fct_aux.N_DECIMALS = 8
         
         a = 1; b = 1; PHI = "A{}B{}".format(a,b)
@@ -618,7 +619,7 @@ if __name__ == "__main__":
         fct_aux.PI_0_MINUS_INIT = 3 #20 #3
         tuple_pi_hp_plus_minus = tuple(zip(pi_hp_plus, pi_hp_minus))
         
-        algos = ["LRI1", "LRI2", "DETERMINIST"]
+        algos = fct_aux.ALGO_NAMES_DET + fct_aux.ALGO_NAMES_LRIx                #["LRI1", "LRI2", "Selfish-DETERMINIST"]
         
         used_storage_det= True #False #True
         manual_debug = False #True #False #True
@@ -671,25 +672,26 @@ if __name__ == "__main__":
         # gamma_versions = [1, 3] # 2
 
         
-    arr_pl_M_T_vars_init, dico_012 \
+    arr_pl_M_T_vars_init, dico_123 \
         = generate_arr_M_T_vars(doc_VALUES, dico_scenario, 
-                                setA_m_players_0, setC_m_players_0,
-                                setA_m_players_12, setB1_m_players_12, 
-                                setB2_m_players_12, setC_m_players_12, 
+                                setA_m_players_1, setC_m_players_1,
+                                setA_m_players_23, setB1_m_players_23, 
+                                setB2_m_players_23, setC_m_players_23, 
                                 t_periods,
                                 path_to_arr_pl_M_T, used_instances)
         
     setX = ""
-    if set(dico_scenario.keys()) == {"scenario0", "scenario1", "scenario2"} \
-        or set(dico_scenario.keys()) == {"scenario0", "scenario1"} \
-        or set(dico_scenario.keys()) == {"scenario0", "scenario2"} :
+    if set(dico_scenario.keys()) == {"scenario1", "scenario2", "scenario3"} \
+        or set(dico_scenario.keys()) == {"scenario1", "scenario2"} \
+        or set(dico_scenario.keys()) == {"scenario1", "scenario3"} :
         setX = "setACsetAB1B2C"
-    elif set(dico_scenario.keys()) == {"scenario0"}:
+    elif set(dico_scenario.keys()) == {"scenario1"}:
         setX = "setAC"
-    elif set(dico_scenario.keys()) == {"scenario1", "scenario2"} \
-        or set(dico_scenario.keys()) == {"scenario1"} \
-        or set(dico_scenario.keys()) == {"scenario2"}:
+    elif set(dico_scenario.keys()) == {"scenario2", "scenario3"} \
+        or set(dico_scenario.keys()) == {"scenario2"} \
+        or set(dico_scenario.keys()) == {"scenario3"}:
         setX = "setAB1B2C"
+    
 
     gamma_Vxs = set(gamma_versions)
     root_gamVersion = "gamma"
@@ -701,7 +703,7 @@ if __name__ == "__main__":
                         + "_" + "T"+str(t_periods) \
                         + "_" + "ksteps" + str(k_steps) \
                         + "_" + setX 
-    zip_scen_arr = list(zip(list(dico_012.keys()), list(dico_012.values())))
+    zip_scen_arr = list(zip(list(dico_123.keys()), list(dico_123.values())))
     dico_params = {
         "zip_scen_arr": zip_scen_arr,
         "name_dir": os.path.join(name_dir,name_execution),
@@ -726,10 +728,10 @@ if __name__ == "__main__":
             
     
     # multi processing execution
-    # p = mp.Pool(mp.cpu_count()-1)
-    # p.starmap(
-    #     autoExeGame4T.execute_algos_used_Generated_instances_ONE_ALGO, 
-    #     params)
+    p = mp.Pool(mp.cpu_count()-1)
+    p.starmap(
+        autoExeGame4T.execute_algos_used_Generated_instances_ONE_ALGO, 
+        params)
     # multi processing execution
     
     print("Multi process running time ={}".format(time.time()-ti))
