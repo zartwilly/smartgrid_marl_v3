@@ -594,7 +594,7 @@ if __name__ == "__main__":
     learning_rates = None
     date_hhmm, Visualisation = None, None
     used_storage_det=True
-    used_instances= True
+    used_instances= True # False
     criteria_bf="Perf_t" # "In_sg_Out_sg"
     dbg_234_players = None
     arr_pl_M_T_vars_init = None
