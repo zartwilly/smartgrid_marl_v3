@@ -29,7 +29,10 @@ def define_parameters_MULTI_gammaV_instances_phiname_arrplMTVars(dico_params):
                 = os.path.join(
                     dico_params["name_dir"],
                     #"OnePeriod_50instances",
-                    phi_name+"OnePeriod_50instances",
+                    phi_name+"OnePeriod_50instances_ksteps"\
+                        +str(dico_params["ksteps"])\
+                        +"_b"+str(dico_params["learning_rates"][0])\
+                        +"_kstoplearn"+str(dico_params["kstoplearn"]),
                     "OnePeriod_"+str(dico_params["nb_instances"])+"instances"+"GammaV"+str(gamma_version))
             
             for numero_instance in range(0, dico_params["nb_instances"]):
@@ -131,7 +134,9 @@ if __name__ == "__main__":
         "t_periods":t_periods,"scenario":scenario,"scenario_name":scenario_name,
         "path_to_arr_pl_M_T":path_to_arr_pl_M_T,"used_instances":used_instances, 
         "name_dir":name_dir, 
-        "NB_REPEAT_K_MAX": NB_REPEAT_K_MAX}
+        "NB_REPEAT_K_MAX": NB_REPEAT_K_MAX, 
+        "ksteps": k_steps, "learning_rates":learning_rates, 
+        "kstoplearn": fct_aux.STOP_LEARNING_PROBA}
     
     params = define_parameters_MULTI_gammaV_instances_phiname_arrplMTVars(dico_params)
     print("define parameters finished")
@@ -143,6 +148,8 @@ if __name__ == "__main__":
         params
     )
     # multi processing execution
+    
+    
     
     print("Multi process running time ={}".format(time.time()-ti))
     
