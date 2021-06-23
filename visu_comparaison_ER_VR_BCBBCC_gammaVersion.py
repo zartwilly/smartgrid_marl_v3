@@ -420,17 +420,17 @@ def turn_arrays_2_2D_learning_algos(arr_pl_M_T_K_vars,
     df_ben_cst_M_T_K_lri = pd.DataFrame({
         'ben':BENs_M_T_K_1D, 'cst':CSTs_M_T_K_1D}, index=tu_mtk)
     
-    ## process of df_B_C_BB_CC_EB_M
-    df_B_C_BB_CC_EB_M_lri \
+    ## process of df_B_C_BB_CC_ER_M
+    df_B_C_BB_CC_ER_M_lri \
         = pd.DataFrame({
                 "B":B_is_M, "C":C_is_M, 
-                "BB":BB_is_M, "CC":CC_is_M, "EB":EB_is_M}, 
+                "BB":BB_is_M, "CC":CC_is_M, "ER":EB_is_M}, 
             index=tu_m)
         
-    # ajouter un dataframe pour df_B_C_BB_CC_EB_M_lri contenant les VARS suivantes
+    # ajouter un dataframe pour df_B_C_BB_CC_ER_M_lri contenant les VARS suivantes
     # ["k_stop", "PROD", "CONS", "b0", "c0", 
-    #    "pi_sg_plus","pi_sg_minus", "B", "C", "BB", "CC", "EB"]
-    # create dataframe df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T_lri_x named df_M_T_lri_x
+    #    "pi_sg_plus","pi_sg_minus", "B", "C", "BB", "CC", "ER"]
+    # create dataframe df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T_lri_x named df_M_T_lri_x
     # tu_mt
     selected_cols = ["state_i","k_stop", "PROD", "CONS", "b0", "c0", 
                      "pi_sg_plus","pi_sg_minus", "B", "C", "BB", "CC", "EB", 
@@ -444,7 +444,7 @@ def turn_arrays_2_2D_learning_algos(arr_pl_M_T_K_vars,
                                 columns=selected_cols)
     
     return df_lri_x, df_b0_c0_pisg_pi0_T_K_lri, \
-            df_ben_cst_M_T_K_lri, df_B_C_BB_CC_EB_M_lri, \
+            df_ben_cst_M_T_K_lri, df_B_C_BB_CC_ER_M_lri, \
             df_M_T_lri_x
 
 def turn_arrays_2_2D_4_not_learning_algos(arr_pl_M_T_K_vars, 
@@ -571,18 +571,18 @@ def turn_arrays_2_2D_4_not_learning_algos(arr_pl_M_T_K_vars,
                       index=tu_mtk, columns=['cst'])
     df_ben_cst_M_T_K_det = pd.concat([df_ben, df_cst], axis=1)    
     
-    ## process of df_B_C_BB_CC_EB_M
-    df_B_C_BB_CC_EB_M_det = pd.DataFrame({
+    ## process of df_B_C_BB_CC_ER_M
+    df_B_C_BB_CC_ER_M_det = pd.DataFrame({
         "B":B_is_M, "C":C_is_M, 
-        "BB":BB_is_M,"CC":CC_is_M,"EB":EB_is_M,}, index=tu_m)
+        "BB":BB_is_M,"CC":CC_is_M,"ER":EB_is_M,}, index=tu_m)
     
     ## process of 
     ## process of 
     
-    # ajouter un dataframe pour df_B_C_BB_CC_EB_M_lri contenant les VARS suivantes
+    # ajouter un dataframe pour df_B_C_BB_CC_ER_M_lri contenant les VARS suivantes
     # ["k_stop", "PROD", "CONS", "b0", "c0", 
-    #    "pi_sg_plus","pi_sg_minus", "B", "C", "BB", "CC", "EB"]
-    # create dataframe df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T_lri
+    #    "pi_sg_plus","pi_sg_minus", "B", "C", "BB", "CC", "ER"]
+    # create dataframe df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T_lri
     # tu_mt
     selected_cols = ["state_i","k_stop", "PROD", "CONS", "b0", "c0", 
                      "pi_sg_plus","pi_sg_minus", "B", "C", "BB", "CC", "EB", 
@@ -590,18 +590,18 @@ def turn_arrays_2_2D_4_not_learning_algos(arr_pl_M_T_K_vars,
     id_cols = [ AUTOMATE_INDEX_ATTRS_NEW[col] for col in selected_cols]
     arr_pl_M_T_KSTOP_vars_2D = arr_pl_M_T_KSTOP_vars[:,:, id_cols]\
                                 .reshape(-1, len(id_cols))
-    df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T_det \
+    df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T_det \
         = pd.DataFrame(data=arr_pl_M_T_KSTOP_vars_2D, 
                        index=tu_mt, 
                        columns=selected_cols)
-    print("df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T_det={}, type={}".format(
-            df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T_det.shape, 
-            type(df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T_det) ))
+    print("df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T_det={}, type={}".format(
+            df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T_det.shape, 
+            type(df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T_det) ))
     
     return df_rd_det, df_b0_c0_pisg_pi0_T_K_det, \
             df_ben_cst_M_T_K_det, \
-            df_B_C_BB_CC_EB_M_det, \
-            df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T_det 
+            df_B_C_BB_CC_ER_M_det, \
+            df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T_det 
     
 def insert_index_as_df_columns(df_arr_M_T_Ks, columns_ind):
     """
@@ -629,8 +629,8 @@ def get_array_turn_df_for_t(tuple_paths, df_LRI_12_stop,
     df_arr_M_T_Ks = []
     df_b0_c0_pisg_pi0_T_K = []
     df_ben_cst_M_T_K = []
-    df_B_C_BB_CC_EB_M = []
-    df_B_C_BB_CC_EB_M_T = []
+    df_B_C_BB_CC_ER_M = []
+    df_B_C_BB_CC_ER_M_T = []
     
     cpt = 0
     for tuple_path in tuple_paths:
@@ -689,11 +689,11 @@ def get_array_turn_df_for_t(tuple_paths, df_LRI_12_stop,
             
         if algo_name in algos_4_learning:
             df_lri_x, df_b0_c0_pisg_pi0_T_K_lri = None, None
-            df_ben_cst_M_T_K_lri, df_B_C_BB_CC_EB_M_lri = None, None
+            df_ben_cst_M_T_K_lri, df_B_C_BB_CC_ER_M_lri = None, None
             df_M_T_lri_x = None
             
             df_lri_x, df_b0_c0_pisg_pi0_T_K_lri, \
-            df_ben_cst_M_T_K_lri, df_B_C_BB_CC_EB_M_lri, \
+            df_ben_cst_M_T_K_lri, df_B_C_BB_CC_ER_M_lri, \
             df_M_T_lri_x \
                 = turn_arrays_2_2D_learning_algos(
                     arr_pl_M_T_K_vars, 
@@ -710,17 +710,17 @@ def get_array_turn_df_for_t(tuple_paths, df_LRI_12_stop,
             df_arr_M_T_Ks.append(df_lri_x)
             df_b0_c0_pisg_pi0_T_K.append(df_b0_c0_pisg_pi0_T_K_lri)
             df_ben_cst_M_T_K.append(df_ben_cst_M_T_K_lri)
-            df_B_C_BB_CC_EB_M.append(df_B_C_BB_CC_EB_M_lri)
-            df_B_C_BB_CC_EB_M_T.append(df_M_T_lri_x)
+            df_B_C_BB_CC_ER_M.append(df_B_C_BB_CC_ER_M_lri)
+            df_B_C_BB_CC_ER_M_T.append(df_M_T_lri_x)
             
         else:
             df_rd_det, df_b0_c0_pisg_pi0_T_K_det = None, None
-            df_ben_cst_M_T_K_det, df_B_C_BB_CC_EB_M_det = None, None
+            df_ben_cst_M_T_K_det, df_B_C_BB_CC_ER_M_det = None, None
             df_M_T_det = None
             
             df_rd_det, df_b0_c0_pisg_pi0_T_K_det, \
             df_ben_cst_M_T_K_det, \
-            df_B_C_BB_CC_EB_M_det, \
+            df_B_C_BB_CC_ER_M_det, \
             df_M_T_det \
                 = turn_arrays_2_2D_4_not_learning_algos(
                     arr_pl_M_T_K_vars, 
@@ -738,8 +738,8 @@ def get_array_turn_df_for_t(tuple_paths, df_LRI_12_stop,
             df_arr_M_T_Ks.append(df_rd_det)    
             df_b0_c0_pisg_pi0_T_K.append(df_b0_c0_pisg_pi0_T_K_det)
             df_ben_cst_M_T_K.append(df_ben_cst_M_T_K_det)
-            df_B_C_BB_CC_EB_M.append(df_B_C_BB_CC_EB_M_det)
-            df_B_C_BB_CC_EB_M_T.append(df_M_T_det)
+            df_B_C_BB_CC_ER_M.append(df_B_C_BB_CC_ER_M_det)
+            df_B_C_BB_CC_ER_M_T.append(df_M_T_det)
             
         cpt += 1 
      
@@ -747,8 +747,8 @@ def get_array_turn_df_for_t(tuple_paths, df_LRI_12_stop,
     df_arr_M_T_Ks = pd.concat(df_arr_M_T_Ks, axis=0)
     df_ben_cst_M_T_K = pd.concat(df_ben_cst_M_T_K, axis=0)
     df_b0_c0_pisg_pi0_T_K = pd.concat(df_b0_c0_pisg_pi0_T_K, axis=0)
-    df_B_C_BB_CC_EB_M = pd.concat(df_B_C_BB_CC_EB_M, axis=0)
-    df_B_C_BB_CC_EB_M_T = pd.concat(df_B_C_BB_CC_EB_M_T, axis=0)
+    df_B_C_BB_CC_ER_M = pd.concat(df_B_C_BB_CC_ER_M, axis=0)
+    df_B_C_BB_CC_ER_M_T = pd.concat(df_B_C_BB_CC_ER_M_T, axis=0)
         
         
     # insert index as columns of dataframes
@@ -762,20 +762,20 @@ def get_array_turn_df_for_t(tuple_paths, df_LRI_12_stop,
     ###  df_b0_c0_pisg_pi0_T_K
     columns_ind = ["algo","rate","prices","gamma_version","scenario","t","k"]
     df_b0_c0_pisg_pi0_T_K = insert_index_as_df_columns(df_b0_c0_pisg_pi0_T_K, columns_ind)
-    ###  df_B_C_BB_CC_EB_M
+    ###  df_B_C_BB_CC_ER_M
     columns_ind = ["algo","rate","prices","gamma_version","scenario","pl_i"]
-    df_B_C_BB_CC_EB_M = insert_index_as_df_columns(df_B_C_BB_CC_EB_M, columns_ind)
-    ### df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T
+    df_B_C_BB_CC_ER_M = insert_index_as_df_columns(df_B_C_BB_CC_ER_M, columns_ind)
+    ### df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T
     columns_ind = ["algo","rate","prices","gamma_version","scenario","pl_i","t"]
-    df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T \
-        = insert_index_as_df_columns(df_B_C_BB_CC_EB_M_T, 
+    df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T \
+        = insert_index_as_df_columns(df_B_C_BB_CC_ER_M_T, 
                                      columns_ind)
     
     
         
     return df_arr_M_T_Ks, df_ben_cst_M_T_K, \
-            df_b0_c0_pisg_pi0_T_K, df_B_C_BB_CC_EB_M, \
-            df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T
+            df_b0_c0_pisg_pi0_T_K, df_B_C_BB_CC_ER_M, \
+            df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T
             
     
 # _____________________________________________________________________________ 
@@ -785,9 +785,9 @@ def get_array_turn_df_for_t(tuple_paths, df_LRI_12_stop,
 
 # _____________________________________________________________________________ 
 #               
-#        get df_EB_VR_EBsetA1B1_EBsetB2C dataframe and merge all --> debut
+#        get df_ER_VR_EBsetA1B1_EBsetB2C dataframe and merge all --> debut
 # _____________________________________________________________________________ 
-def get_df_EB_VR_EBsetA1B1_EBsetB2C_merge_all(tuple_paths, 
+def get_df_ER_VR_EBsetA1B1_EBsetB2C_merge_all(tuple_paths, 
                                              scenarios=["scenario2", 
                                                         "scenario3"]):
     """
@@ -816,31 +816,31 @@ def get_df_EB_VR_EBsetA1B1_EBsetB2C_merge_all(tuple_paths,
             dico_res_scen3[algo] = dico
     
     dico_res_scen2['tau'] = {"EB_setA1B1":np.nan, "EB_setB2C":np.nan, 
-                             "EB":np.nan, "VR":np.nan, "algo":"tau", 
+                             "ER":np.nan, "VR":np.nan, "algo":"tau", 
                              "scenario":"scenario2"}
     dico_res_scen3['tau'] = {"EB_setA1B1":np.nan, "EB_setB2C":np.nan, 
-                             "EB":np.nan, "VR":np.nan, "algo":"tau", 
+                             "ER":np.nan, "VR":np.nan, "algo":"tau", 
                              "scenario":"scenario3"}
     
     
-    df_EB_VR_EBsetA1B1_EBsetB2C_scenario2 = pd.DataFrame(dico_res_scen2).T
-    df_EB_VR_EBsetA1B1_EBsetB2C_scenario3 = pd.DataFrame(dico_res_scen3).T
+    df_ER_VR_EBsetA1B1_EBsetB2C_scenario2 = pd.DataFrame(dico_res_scen2).T
+    df_ER_VR_EBsetA1B1_EBsetB2C_scenario3 = pd.DataFrame(dico_res_scen3).T
     cols = ["EB_setA1B1", "EB_setB2C"]
     for col in cols:
-        df_EB_VR_EBsetA1B1_EBsetB2C_scenario2.loc["tau",col]  \
-            = df_EB_VR_EBsetA1B1_EBsetB2C_scenario2.loc[fct_aux.ALGO_NAMES_DET[0],col] \
-                - df_EB_VR_EBsetA1B1_EBsetB2C_scenario2.loc["LRI2",col]
+        df_ER_VR_EBsetA1B1_EBsetB2C_scenario2.loc["tau",col]  \
+            = df_ER_VR_EBsetA1B1_EBsetB2C_scenario2.loc[fct_aux.ALGO_NAMES_DET[0],col] \
+                - df_ER_VR_EBsetA1B1_EBsetB2C_scenario2.loc["LRI2",col]
     for col in cols:
-        df_EB_VR_EBsetA1B1_EBsetB2C_scenario3.loc["tau",col]  \
-            = df_EB_VR_EBsetA1B1_EBsetB2C_scenario3.loc[fct_aux.ALGO_NAMES_DET[0],col] \
-                - df_EB_VR_EBsetA1B1_EBsetB2C_scenario3.loc["LRI2",col]
+        df_ER_VR_EBsetA1B1_EBsetB2C_scenario3.loc["tau",col]  \
+            = df_ER_VR_EBsetA1B1_EBsetB2C_scenario3.loc[fct_aux.ALGO_NAMES_DET[0],col] \
+                - df_ER_VR_EBsetA1B1_EBsetB2C_scenario3.loc["LRI2",col]
     
-    return df_EB_VR_EBsetA1B1_EBsetB2C_scenario2, \
-            df_EB_VR_EBsetA1B1_EBsetB2C_scenario3
+    return df_ER_VR_EBsetA1B1_EBsetB2C_scenario2, \
+            df_ER_VR_EBsetA1B1_EBsetB2C_scenario3
 
 # _____________________________________________________________________________ 
 #               
-#        get df_EB_VR_EBsetA1B1_EBsetB2C dataframe and merge all --> fin
+#        get df_ER_VR_EBsetA1B1_EBsetB2C dataframe and merge all --> fin
 # _____________________________________________________________________________ 
 
 # _____________________________________________________________________________ 
@@ -1248,18 +1248,18 @@ def plot_gamma_version_BC(df_ra_pr, rate, price, scenario):
     
     return px
     
-def plot_comparaison_gamma_version_BC(df_B_C_BB_CC_EB_M):
-    rates = df_B_C_BB_CC_EB_M.rate.unique(); rates = rates[rates!=0].tolist()
-    prices = df_B_C_BB_CC_EB_M.prices.unique().tolist()
-    scenarios = df_B_C_BB_CC_EB_M.scenario.unique().tolist()
+def plot_comparaison_gamma_version_BC(df_B_C_BB_CC_ER_M):
+    rates = df_B_C_BB_CC_ER_M.rate.unique(); rates = rates[rates!=0].tolist()
+    prices = df_B_C_BB_CC_ER_M.prices.unique().tolist()
+    scenarios = df_B_C_BB_CC_ER_M.scenario.unique().tolist()
     
     dico_pxs = dict()
     for rate, price, scenario in it.product(rates, prices, scenarios):
-        mask_ra_pr = ((df_B_C_BB_CC_EB_M.rate == rate) \
-                      | (df_B_C_BB_CC_EB_M.rate == 0)) \
-                        & (df_B_C_BB_CC_EB_M.prices == price) \
-                        & (df_B_C_BB_CC_EB_M.scenario == scenario) 
-        df_ra_pr = df_B_C_BB_CC_EB_M[mask_ra_pr].copy()
+        mask_ra_pr = ((df_B_C_BB_CC_ER_M.rate == rate) \
+                      | (df_B_C_BB_CC_ER_M.rate == 0)) \
+                        & (df_B_C_BB_CC_ER_M.prices == price) \
+                        & (df_B_C_BB_CC_ER_M.scenario == scenario) 
+        df_ra_pr = df_B_C_BB_CC_ER_M[mask_ra_pr].copy()
         
         pxs_pr_ra_sc = plot_gamma_version_BC(df_ra_pr, rate, price, scenario)
         pxs_pr_ra_sc.legend.click_policy="hide"
@@ -1270,13 +1270,13 @@ def plot_comparaison_gamma_version_BC(df_B_C_BB_CC_EB_M):
         else:
             dico_pxs[(price, rate, scenario)].append(pxs_pr_ra_sc)
         
-    rows_EB_C_B_CC_BB = list()
+    rows_ER_C_B_CC_BB = list()
     for key, pxs_pr_ra_sc in dico_pxs.items():
         col_px_sts = column(pxs_pr_ra_sc)
-        rows_EB_C_B_CC_BB.append(col_px_sts)
-    rows_EB_C_B_CC_BB=column(children=rows_EB_C_B_CC_BB, 
+        rows_ER_C_B_CC_BB.append(col_px_sts)
+    rows_ER_C_B_CC_BB=column(children=rows_ER_C_B_CC_BB, 
                              sizing_mode='stretch_both')
-    return rows_EB_C_B_CC_BB
+    return rows_ER_C_B_CC_BB
 # _____________________________________________________________________________ 
 #               
 #                   plot B,C 4 various gamma_version 4 each scenario 
@@ -1285,100 +1285,100 @@ def plot_comparaison_gamma_version_BC(df_B_C_BB_CC_EB_M):
 
 # _____________________________________________________________________________ 
 #               
-#                   plot EB 4 various gamma_version 4 each scenario 
+#                   plot ER 4 various gamma_version 4 each scenario 
 #                            --> debut
 # _____________________________________________________________________________ 
-def OLD_plot_gamma_version_EB(df_ra_pr, rate, price, scenario):
+# def OLD_plot_gamma_version_ER(df_ra_pr, rate, price, scenario):
     
-    cols_2_group = ["algo","gamma_version"]
+#     cols_2_group = ["algo","gamma_version"]
     
-    cols = ["B","C","BB","CC","EB"]; 
-    df_res = df_ra_pr.groupby(cols_2_group)[cols]\
-                .agg({"B": [np.mean, np.std, np.min, np.max], 
-                      "C": [np.mean, np.std, np.min, np.max], 
-                      "BB":[np.mean, np.std, np.min, np.max],
-                      "CC":[np.mean, np.std, np.min, np.max],
-                      "EB":[np.mean, np.std, np.min, np.max]})
-    df_res.columns = ["_".join(x) for x in df_res.columns.ravel()]
-    df_res = df_res.reset_index()
+#     cols = ["B","C","BB","CC","EB"]; 
+#     df_res = df_ra_pr.groupby(cols_2_group)[cols]\
+#                 .agg({"B": [np.mean, np.std, np.min, np.max], 
+#                       "C": [np.mean, np.std, np.min, np.max], 
+#                       "BB":[np.mean, np.std, np.min, np.max],
+#                       "CC":[np.mean, np.std, np.min, np.max],
+#                       "EB":[np.mean, np.std, np.min, np.max]})
+#     df_res.columns = ["_".join(x) for x in df_res.columns.ravel()]
+#     df_res = df_res.reset_index()
     
-    aggs = ["amin", "amax", "std", "mean"]
-    tooltips = [("{}_{}".format(col, agg), "@{}_{}".format(col, agg)) 
-                for (col, agg) in it.product(cols, aggs)]
-    TOOLS[7] = HoverTool(tooltips = tooltips)
+#     aggs = ["amin", "amax", "std", "mean"]
+#     tooltips = [("{}_{}".format(col, agg), "@{}_{}".format(col, agg)) 
+#                 for (col, agg) in it.product(cols, aggs)]
+#     TOOLS[7] = HoverTool(tooltips = tooltips)
     
-    new_cols = [col[1].split("@")[1] 
-                for col in tooltips if col[1].split("_")[1] == "mean"]
-    print('new_cols={}, df_res.cols={}'.format(new_cols, df_res.columns))
+#     new_cols = [col[1].split("@")[1] 
+#                 for col in tooltips if col[1].split("_")[1] == "mean"]
+#     print('new_cols={}, df_res.cols={}'.format(new_cols, df_res.columns))
     
-    x = list(map(tuple,list(df_res[cols_2_group].values)))
-    px = figure(x_range=FactorRange(*x), 
-                y_range=(0, df_res[new_cols].values.max() + 5), 
-                plot_height = int(350), 
-                plot_width = int(WIDTH*MULT_WIDTH), tools = TOOLS, 
-                toolbar_location="above")
+#     x = list(map(tuple,list(df_res[cols_2_group].values)))
+#     px = figure(x_range=FactorRange(*x), 
+#                 y_range=(0, df_res[new_cols].values.max() + 5), 
+#                 plot_height = int(350), 
+#                 plot_width = int(WIDTH*MULT_WIDTH), tools = TOOLS, 
+#                 toolbar_location="above")
            
-    data = dict(x = x, 
-                B_mean=df_res.B_mean.tolist(), 
-                C_mean=df_res.C_mean.tolist(), 
-                BB_mean=df_res.BB_mean.tolist(), 
-                CC_mean=df_res.CC_mean.tolist(), 
-                EB_mean=df_res.EB_mean.tolist(), 
-                B_std=df_res.B_std.tolist(), 
-                C_std=df_res.C_std.tolist(), 
-                BB_std=df_res.BB_std.tolist(), 
-                CC_std=df_res.CC_std.tolist(), 
-                EB_std=df_res.EB_std.tolist(),
-                B_amin=df_res.B_amin.tolist(), 
-                C_amin=df_res.C_amin.tolist(), 
-                BB_amin=df_res.BB_amin.tolist(), 
-                CC_amin=df_res.CC_amin.tolist(), 
-                EB_amin=df_res.EB_amin.tolist(), 
-                B_amax=df_res.B_amax.tolist(), 
-                C_amax=df_res.C_amax.tolist(), 
-                BB_amax=df_res.BB_amax.tolist(), 
-                CC_amax=df_res.CC_amax.tolist(), 
-                EB_amax=df_res.EB_amax.tolist()
-                )
+#     data = dict(x = x, 
+#                 B_mean=df_res.B_mean.tolist(), 
+#                 C_mean=df_res.C_mean.tolist(), 
+#                 BB_mean=df_res.BB_mean.tolist(), 
+#                 CC_mean=df_res.CC_mean.tolist(), 
+#                 EB_mean=df_res.EB_mean.tolist(), 
+#                 B_std=df_res.B_std.tolist(), 
+#                 C_std=df_res.C_std.tolist(), 
+#                 BB_std=df_res.BB_std.tolist(), 
+#                 CC_std=df_res.CC_std.tolist(), 
+#                 EB_std=df_res.EB_std.tolist(),
+#                 B_amin=df_res.B_amin.tolist(), 
+#                 C_amin=df_res.C_amin.tolist(), 
+#                 BB_amin=df_res.BB_amin.tolist(), 
+#                 CC_amin=df_res.CC_amin.tolist(), 
+#                 EB_amin=df_res.EB_amin.tolist(), 
+#                 B_amax=df_res.B_amax.tolist(), 
+#                 C_amax=df_res.C_amax.tolist(), 
+#                 BB_amax=df_res.BB_amax.tolist(), 
+#                 CC_amax=df_res.CC_amax.tolist(), 
+#                 EB_amax=df_res.EB_amax.tolist()
+#                 )
 
-    print("data keys={}".format(data.keys()))
-    source = ColumnDataSource(data = data)
+#     print("data keys={}".format(data.keys()))
+#     source = ColumnDataSource(data = data)
     
-    width= 0.2 #0.5
-    # px.vbar(x='x', top=new_cols[4], width=0.9, source=source, color="#c9d9d3")
+#     width= 0.2 #0.5
+#     # px.vbar(x='x', top=new_cols[4], width=0.9, source=source, color="#c9d9d3")
             
-    # px.vbar(x='x', top=new_cols[0], width=0.9, source=source, color="#718dbf")
+#     # px.vbar(x='x', top=new_cols[0], width=0.9, source=source, color="#718dbf")
     
-    px.vbar(x=dodge('x', -0.3+0*width, range=px.x_range), top=new_cols[0], 
-                    width=width, source=source, legend_label=new_cols[0], 
-                    color="#c9d9d3")
-    px.vbar(x=dodge('x', -0.3+1*width, range=px.x_range), top=new_cols[1], 
-                    width=width, source=source, legend_label=new_cols[1], 
-                    color="#718dbf")
-    px.vbar(x=dodge('x', -0.3+2*width, range=px.x_range), top=new_cols[2], 
-                    width=width, source=source, legend_label=new_cols[2], 
-                    color="#e84d60")
-    px.vbar(x=dodge('x', -0.3+3*width, range=px.x_range), top=new_cols[3], 
-                    width=width, source=source, legend_label=new_cols[3], 
-                    color="#ddb7b1")
-    px.vbar(x=dodge('x', -0.3+4*width, range=px.x_range), top=new_cols[4], 
-                    width=width, source=source, legend_label=new_cols[4], 
-                    color="#FFD700")
+#     px.vbar(x=dodge('x', -0.3+0*width, range=px.x_range), top=new_cols[0], 
+#                     width=width, source=source, legend_label=new_cols[0], 
+#                     color="#c9d9d3")
+#     px.vbar(x=dodge('x', -0.3+1*width, range=px.x_range), top=new_cols[1], 
+#                     width=width, source=source, legend_label=new_cols[1], 
+#                     color="#718dbf")
+#     px.vbar(x=dodge('x', -0.3+2*width, range=px.x_range), top=new_cols[2], 
+#                     width=width, source=source, legend_label=new_cols[2], 
+#                     color="#e84d60")
+#     px.vbar(x=dodge('x', -0.3+3*width, range=px.x_range), top=new_cols[3], 
+#                     width=width, source=source, legend_label=new_cols[3], 
+#                     color="#ddb7b1")
+#     px.vbar(x=dodge('x', -0.3+4*width, range=px.x_range), top=new_cols[4], 
+#                     width=width, source=source, legend_label=new_cols[4], 
+#                     color="#FFD700")
     
-    title = "comparison Gamma_version ({},rate:{}, price={})".format(scenario, rate, price)
-    px.title.text = title
-    px.y_range.start = df_res.EB_mean.min() - 1 if df_res.EB_mean.min() < 0 else 0
-    px.x_range.range_padding = width
-    px.xgrid.grid_line_color = None
-    px.legend.location = "top_right" #"top_left"
-    px.legend.orientation = "horizontal"
-    px.xaxis.axis_label = "algo"
-    px.yaxis.axis_label = "values"
+#     title = "comparison Gamma_version ({},rate:{}, price={})".format(scenario, rate, price)
+#     px.title.text = title
+#     px.y_range.start = df_res.EB_mean.min() - 1 if df_res.EB_mean.min() < 0 else 0
+#     px.x_range.range_padding = width
+#     px.xgrid.grid_line_color = None
+#     px.legend.location = "top_right" #"top_left"
+#     px.legend.orientation = "horizontal"
+#     px.xaxis.axis_label = "algo"
+#     px.yaxis.axis_label = "values"
     
-    return px
+#     return px
     
 
-def plot_gamma_version_EB(df_ra_pr, rate, price, scenario):
+def plot_gamma_version_ER(df_ra_pr, rate, price, scenario):
     
     cols_2_group = ["algo","gamma_version"]
     
@@ -1452,20 +1452,20 @@ def plot_gamma_version_EB(df_ra_pr, rate, price, scenario):
     return px
     
 
-def plot_comparaison_gamma_version_EB(df_B_C_BB_CC_EB_M):
-    rates = df_B_C_BB_CC_EB_M.rate.unique(); rates = rates[rates!=0].tolist()
-    prices = df_B_C_BB_CC_EB_M.prices.unique().tolist()
-    scenarios = df_B_C_BB_CC_EB_M.scenario.unique().tolist()
+def plot_comparaison_gamma_version_ER(df_B_C_BB_CC_ER_M):
+    rates = df_B_C_BB_CC_ER_M.rate.unique(); rates = rates[rates!=0].tolist()
+    prices = df_B_C_BB_CC_ER_M.prices.unique().tolist()
+    scenarios = df_B_C_BB_CC_ER_M.scenario.unique().tolist()
     
     dico_pxs = dict()
     for rate, price, scenario in it.product(rates, prices, scenarios):
-        mask_ra_pr = ((df_B_C_BB_CC_EB_M.rate == rate) \
-                      | (df_B_C_BB_CC_EB_M.rate == 0)) \
-                        & (df_B_C_BB_CC_EB_M.prices == price) \
-                        & (df_B_C_BB_CC_EB_M.scenario == scenario) 
-        df_ra_pr = df_B_C_BB_CC_EB_M[mask_ra_pr].copy()
+        mask_ra_pr = ((df_B_C_BB_CC_ER_M.rate == rate) \
+                      | (df_B_C_BB_CC_ER_M.rate == 0)) \
+                        & (df_B_C_BB_CC_ER_M.prices == price) \
+                        & (df_B_C_BB_CC_ER_M.scenario == scenario) 
+        df_ra_pr = df_B_C_BB_CC_ER_M[mask_ra_pr].copy()
         
-        pxs_pr_ra_sc = plot_gamma_version_EB(df_ra_pr, rate, price, scenario)
+        pxs_pr_ra_sc = plot_gamma_version_ER(df_ra_pr, rate, price, scenario)
         pxs_pr_ra_sc.legend.click_policy="hide"
         
         if (price, rate, scenario) not in dico_pxs.keys():
@@ -1483,12 +1483,12 @@ def plot_comparaison_gamma_version_EB(df_B_C_BB_CC_EB_M):
     return rows_EB_C_B_CC_BB
 # _____________________________________________________________________________ 
 #               
-#                   plot EB 4 various gamma_version 4 each scenario
+#                   plot ER 4 various gamma_version 4 each scenario
 #                                       --> fin
 # _____________________________________________________________________________ 
 # _____________________________________________________________________________ 
 #               
-#                   plot EB 4 various gamma_version 4 all scenarios 
+#                   plot ER 4 various gamma_version 4 all scenarios 
 #                            --> debut
 # _____________________________________________________________________________ 
 def plot_gamma_version_all_scenarios(df_ra_pr, rate, price):
@@ -1581,16 +1581,16 @@ def plot_gamma_version_all_scenarios(df_ra_pr, rate, price):
     return px
     
 
-def plot_comparaison_gamma_version_all_scenarios(df_B_C_BB_CC_EB_M):
-    rates = df_B_C_BB_CC_EB_M.rate.unique(); rates = rates[rates!=0].tolist()
-    prices = df_B_C_BB_CC_EB_M.prices.unique().tolist()
+def plot_comparaison_gamma_version_all_scenarios(df_B_C_BB_CC_ER_M):
+    rates = df_B_C_BB_CC_ER_M.rate.unique(); rates = rates[rates!=0].tolist()
+    prices = df_B_C_BB_CC_ER_M.prices.unique().tolist()
     
     dico_pxs = dict()
     for rate, price in it.product(rates, prices):
-        mask_ra_pr = ((df_B_C_BB_CC_EB_M.rate == rate) \
-                      | (df_B_C_BB_CC_EB_M.rate == 0)) \
-                        & (df_B_C_BB_CC_EB_M.prices == price)
-        df_ra_pr = df_B_C_BB_CC_EB_M[mask_ra_pr].copy()
+        mask_ra_pr = ((df_B_C_BB_CC_ER_M.rate == rate) \
+                      | (df_B_C_BB_CC_ER_M.rate == 0)) \
+                        & (df_B_C_BB_CC_ER_M.prices == price)
+        df_ra_pr = df_B_C_BB_CC_ER_M[mask_ra_pr].copy()
         
         pxs_pr_ra = plot_gamma_version_all_scenarios(df_ra_pr, rate, price)
         pxs_pr_ra.legend.click_policy="hide"
@@ -1610,7 +1610,7 @@ def plot_comparaison_gamma_version_all_scenarios(df_B_C_BB_CC_EB_M):
     return rows_EB_C_B_CC_BB
 # _____________________________________________________________________________ 
 #               
-#                   plot EB 4 various gamma_version 4 all scenarios 
+#                   plot ER 4 various gamma_version 4 all scenarios 
 #                            --> fin
 # _____________________________________________________________________________ 
 
@@ -1701,7 +1701,7 @@ def plot_distribution(df_al_pr_ra_sc, algo, rate, price, scenario, gamma_version
 #     return rows_dists_ts
 
 def plot_distribution_by_states_4_periods(
-        df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T, 
+        df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T, 
         dico_SelectGammaVersion
         ):
     """
@@ -1709,7 +1709,7 @@ def plot_distribution_by_states_4_periods(
     plot is the bar plot with key is (t, stateX) (X={1,2,3})
     
     """
-    df_M_T = df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T.copy()
+    df_M_T = df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T.copy()
     
     rates = df_M_T.rate.unique(); rates = rates[rates!=0].tolist()
     prices = df_M_T.prices.unique().tolist()
@@ -1756,7 +1756,7 @@ def plot_distribution_by_states_4_periods(
 
 # _____________________________________________________________________________
 #
-#              evolution prices B, C, BB, CC, EB for periods ---> debut
+#              evolution prices B, C, BB, CC, ER for periods ---> debut
 # _____________________________________________________________________________
 # def OLD_plot_evolution_prices_for_time(df_al_pr_ra_sc_gam, algo, rate, 
 #                                    price, scenario, gamma_version):
@@ -1987,63 +1987,63 @@ def plot_evolution_prices_for_time(df_al_pr_ra_sc_gam, algo, rate,
     
     return px
     
-def OLD_plot_evolution_RU_C_B_CC_BB_over_time(
-                    df_B_C_BB_CC_RU_CONS_PROD_b0_c0_pisg_M_T, 
-                    algos=["LRI1"], 
-                    gamma_versions=["gammaV1"], 
-                    scenarios=["scenario0"]
-                    ):
+# def OLD_plot_evolution_RU_C_B_CC_BB_over_time(
+#                     df_B_C_BB_CC_RU_CONS_PROD_b0_c0_pisg_M_T, 
+#                     algos=["LRI1"], 
+#                     gamma_versions=["gammaV1"], 
+#                     scenarios=["scenario0"]
+#                     ):
     
-    df = df_B_C_BB_CC_RU_CONS_PROD_b0_c0_pisg_M_T.copy()
+#     df = df_B_C_BB_CC_RU_CONS_PROD_b0_c0_pisg_M_T.copy()
     
-    rates = df.rate.unique(); rates = rates[rates!=0].tolist()
-    prices = df.prices.unique().tolist()
-    scenarios = df.scenario.unique().tolist() if len(scenarios) == 0 \
-                                                else scenarios
-    gamma_versions = df.gamma_version.unique().tolist() \
-                        if len(gamma_versions) == 0 \
-                        else gamma_versions
-    algos = df.algo.unique().tolist() if len(algos) == 0 else algos 
+#     rates = df.rate.unique(); rates = rates[rates!=0].tolist()
+#     prices = df.prices.unique().tolist()
+#     scenarios = df.scenario.unique().tolist() if len(scenarios) == 0 \
+#                                                 else scenarios
+#     gamma_versions = df.gamma_version.unique().tolist() \
+#                         if len(gamma_versions) == 0 \
+#                         else gamma_versions
+#     algos = df.algo.unique().tolist() if len(algos) == 0 else algos 
     
-    dico_pxs = dict()
-    for algo, price, rate, scenario, gamma_version \
-        in it.product(algos, prices, rates, scenarios, gamma_versions):
-        mask_al_pr_ra_sc_gam = ((df.rate == str(rate)) | (df.rate == 0)) \
-                                & (df.prices == price) \
-                                & (df.algo == algo) \
-                                & (df.scenario == scenario) \
-                                & (df.gamma_version == gamma_version)
-        df_al_pr_ra_sc_gam = df[mask_al_pr_ra_sc_gam].copy()
+#     dico_pxs = dict()
+#     for algo, price, rate, scenario, gamma_version \
+#         in it.product(algos, prices, rates, scenarios, gamma_versions):
+#         mask_al_pr_ra_sc_gam = ((df.rate == str(rate)) | (df.rate == 0)) \
+#                                 & (df.prices == price) \
+#                                 & (df.algo == algo) \
+#                                 & (df.scenario == scenario) \
+#                                 & (df.gamma_version == gamma_version)
+#         df_al_pr_ra_sc_gam = df[mask_al_pr_ra_sc_gam].copy()
         
-        print("{}, {}, {}, df_al_pr_ra_sc_gam={}".format(algo, 
-                scenario, gamma_version, df_al_pr_ra_sc_gam.shape ))
-        pxs_al_pr_ra_sc_gam = plot_evolution_prices_for_time(
-                                df_al_pr_ra_sc_gam, algo, rate, 
-                                price, scenario, gamma_version)
-        pxs_al_pr_ra_sc_gam.legend.click_policy="hide"
+#         print("{}, {}, {}, df_al_pr_ra_sc_gam={}".format(algo, 
+#                 scenario, gamma_version, df_al_pr_ra_sc_gam.shape ))
+#         pxs_al_pr_ra_sc_gam = plot_evolution_prices_for_time(
+#                                 df_al_pr_ra_sc_gam, algo, rate, 
+#                                 price, scenario, gamma_version)
+#         pxs_al_pr_ra_sc_gam.legend.click_policy="hide"
         
-        if (algo, price, rate, scenario, gamma_version) not in dico_pxs.keys():
-            dico_pxs[(algo, price, rate, scenario, gamma_version)] \
-                = [pxs_al_pr_ra_sc_gam]
-        else:
-            dico_pxs[(algo, price, rate, scenario, gamma_version)]\
-                .append(pxs_al_pr_ra_sc_gam)
+#         if (algo, price, rate, scenario, gamma_version) not in dico_pxs.keys():
+#             dico_pxs[(algo, price, rate, scenario, gamma_version)] \
+#                 = [pxs_al_pr_ra_sc_gam]
+#         else:
+#             dico_pxs[(algo, price, rate, scenario, gamma_version)]\
+#                 .append(pxs_al_pr_ra_sc_gam)
         
-    rows_evol_RU_C_B_CC_BB = list()
-    for key, pxs_al_pr_ra_sc_gam in dico_pxs.items():
-        col_px_sts = column(pxs_al_pr_ra_sc_gam)
-        rows_evol_RU_C_B_CC_BB.append(col_px_sts)
-    rows_evol_RU_C_B_CC_BB = column(children=rows_evol_RU_C_B_CC_BB, 
-                                    sizing_mode='stretch_both')
-    return rows_evol_RU_C_B_CC_BB
+#     rows_evol_RU_C_B_CC_BB = list()
+#     for key, pxs_al_pr_ra_sc_gam in dico_pxs.items():
+#         col_px_sts = column(pxs_al_pr_ra_sc_gam)
+#         rows_evol_RU_C_B_CC_BB.append(col_px_sts)
+#     rows_evol_RU_C_B_CC_BB = column(children=rows_evol_RU_C_B_CC_BB, 
+#                                     sizing_mode='stretch_both')
+#     return rows_evol_RU_C_B_CC_BB
         
         
-def plot_evolution_EB_C_B_CC_BB_over_time(
-            df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T,
+def plot_evolution_ER_C_B_CC_BB_over_time(
+            df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T,
             algos=["LRI1"], 
             dico_SelectGammaVersion={"Selfish-DETERMINIST": [1],"LRI1": [1],"LRI2": [0]}):
     
-    df = df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T.copy()
+    df = df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T.copy()
     
     rates = df.rate.unique(); rates = rates[rates!=0].tolist()
     prices = df.prices.unique().tolist()
@@ -2086,7 +2086,7 @@ def plot_evolution_EB_C_B_CC_BB_over_time(
     return rows_evol_EB_C_B_CC_BB
 # _____________________________________________________________________________
 #
-#              evolution prices B, C, BB, CC, EB for periods ---> fin
+#              evolution prices B, C, BB, CC, ER for periods ---> fin
 # _____________________________________________________________________________
 
 # _____________________________________________________________________________
@@ -2147,11 +2147,11 @@ def plot_evolution_stocks_by_players_for_time(df_al_pr_ra_sc_gam, algo, rate,
     
 
 def plot_evolution_Si_by_players_over_time(
-            df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T,
+            df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T,
             algos=["LRI1"], 
             dico_SelectGammaVersion={"Selfish-DETERMINIST": [1],"LRI1": [1],"LRI2": [0]}):
     
-    df = df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T.copy()
+    df = df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T.copy()
     df["pl_i"] = df.pl_i.astype(str)
     df["t"] = df.t.astype(str)
     
@@ -2403,13 +2403,13 @@ def plot_evolution_players_by_situation_for_time(df_al_pr_ra_sc_gam,
     
 
 def plot_evolution_players_by_situation_over_time(
-            df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T,
+            df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T,
             algos=["LRI1"], 
             dico_SelectGammaVersion={"Selfish-DETERMINIST": [1],"LRI1": [1],"LRI2": [0]}):
     """
     evolution of the number of player by situations over periods
     """
-    df = df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T.copy()
+    df = df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T.copy()
     df["pl_i"] = df.pl_i.astype(str)
     df["t"] = df.t.astype(str)
     
@@ -2464,19 +2464,19 @@ def plot_evolution_players_by_situation_over_time(
 
 # _____________________________________________________________________________
 #
-#                           plot EB R TAU ---> debut
+#                           plot ER R TAU ---> debut
 # _____________________________________________________________________________
-def plot_bar_4_EB_VR_TAU(df_scenX):
+def plot_bar_4_ER_VR_TAU(df_scenX):
     data = {"algo": df_scenX["algo"].values.tolist(), 
             "EB_setA1B1": df_scenX["EB_setA1B1"].values.tolist(),
             "EB_setB2C": df_scenX["EB_setB2C"].values.tolist(),
-            "EB": df_scenX["EB"].values.tolist(),
+            "ER": df_scenX["ER"].values.tolist(),
             "VR": df_scenX["VR"].values.tolist()}
-    cols = ["EB_setA1B1", "EB_setB2C", "EB", "VR"]
+    cols = ["EB_setA1B1", "EB_setB2C", "ER", "VR"]
     algos = df_scenX["algo"].values.tolist()
     
     x = [ (algo, col) for algo in algos for col in cols ]
-    counts = sum(zip(data['EB_setA1B1'], data['EB_setB2C'], data['EB'], data['VR']), ()) # like an hstack
+    counts = sum(zip(data['EB_setA1B1'], data['EB_setB2C'], data['ER'], data['VR']), ()) # like an hstack
 
     x = x[:-2]; counts = counts[:-2]
     source = ColumnDataSource(data=dict(x=x, counts=counts))
@@ -2495,10 +2495,10 @@ def plot_bar_4_EB_VR_TAU(df_scenX):
             fill_color=factor_cmap('x', palette=Category20[20], 
                                    factors=cols, start=1, end=2))
 
-    title = "{}: EB, VR, Tau".format(df_scenX.scenario.unique().tolist()[0])
+    title = "{}: ER, VR, Tau".format(df_scenX.scenario.unique().tolist()[0])
     px.title.text = title
     
-    min_val = df_scenX[['EB_setA1B1', 'EB_setB2C', 'EB', 'VR']].min().min()
+    min_val = df_scenX[['EB_setA1B1', 'EB_setB2C', 'ER', 'VR']].min().min()
     px.y_range.start = min_val-1 if  min_val < 0 else 0
     px.x_range.range_padding = width
     px.xgrid.grid_line_color = None
@@ -2511,91 +2511,91 @@ def plot_bar_4_EB_VR_TAU(df_scenX):
     
     return px
 
-def plot_EB_VR_TAU(df_EB_R_EBsetA1B1_EBsetB2C_scenario2, 
-                  df_EB_R_EBsetA1B1_EBsetB2C_scenario3):
-    df_scen2 = df_EB_R_EBsetA1B1_EBsetB2C_scenario2
-    df_scen3 = df_EB_R_EBsetA1B1_EBsetB2C_scenario3
+def plot_ER_VR_TAU(df_ER_VR_EBsetA1B1_EBsetB2C_scenario2, 
+                   df_ER_VR_EBsetA1B1_EBsetB2C_scenario3):
+    df_scen2 = df_ER_VR_EBsetA1B1_EBsetB2C_scenario2
+    df_scen3 = df_ER_VR_EBsetA1B1_EBsetB2C_scenario3
     
-    px_scen2 = plot_bar_4_EB_VR_TAU(df_scen2)
-    px_scen3 = plot_bar_4_EB_VR_TAU(df_scen3)
+    px_scen2 = plot_bar_4_ER_VR_TAU(df_scen2)
+    px_scen3 = plot_bar_4_ER_VR_TAU(df_scen3)
     
     px_scen2.legend.click_policy="hide"
     px_scen3.legend.click_policy="hide"
     
     col_px_scen2 = column(px_scen2)
     col_px_scen3 = column(px_scen3)
-    rows_EB_VR_TAU = [col_px_scen2, col_px_scen3]
-    rows_EB_VR_TAU = column(children=rows_EB_VR_TAU, 
-                           sizing_mode='stretch_both')
+    rows_ER_VR_TAU = [col_px_scen2, col_px_scen3]
+    rows_ER_VR_TAU = column(children=rows_ER_VR_TAU, 
+                            sizing_mode='stretch_both')
     
-    return rows_EB_VR_TAU
+    return rows_ER_VR_TAU
     
 # _____________________________________________________________________________
 #
-#                           plot EB VR TAU ---> fin
+#                           plot ER VR TAU ---> fin
 # _____________________________________________________________________________
 
 # _____________________________________________________________________________
 #
 #                   affichage  dans tab  ---> debut
 # _____________________________________________________________________________
-def group_plot_on_panel(df_B_C_BB_CC_EB_M, 
-                        df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T,
-                        df_EB_VR_EBsetA1B1_EBsetB2C_scenario2,
-                        df_EB_VR_EBsetA1B1_EBsetB2C_scenario3, 
+def group_plot_on_panel(df_B_C_BB_CC_ER_M, 
+                        df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T,
+                        df_ER_VR_EBsetA1B1_EBsetB2C_scenario2,
+                        df_ER_VR_EBsetA1B1_EBsetB2C_scenario3, 
                         algos_to_show, 
                         dico_SelectGammaVersion):
     
     cols = ["B", "C", "BB", "CC", "EB"]
     for col in cols:
-        df_B_C_BB_CC_EB_M[col] = df_B_C_BB_CC_EB_M[col].astype(float)
+        df_B_C_BB_CC_ER_M[col] = df_B_C_BB_CC_ER_M[col].astype(float)
     
     cols = ["PROD", "CONS", "b0", "c0", "pi_sg_plus","pi_sg_minus", 
             "B", "C", "BB", "CC", "EB", "Cicum", "Picum"]
     for col in cols:
-        df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T[col] \
-            = df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T[col].astype(float)
+        df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T[col] \
+            = df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T[col].astype(float)
             
             
-    cols = ["EB_setA1B1", "EB_setB2C", "EB", "VR"]
+    cols = ["EB_setA1B1", "EB_setB2C", "ER", "VR"]
     for col in cols:
-        df_EB_VR_EBsetA1B1_EBsetB2C_scenario2[col] \
-            = df_EB_VR_EBsetA1B1_EBsetB2C_scenario2[col].astype(float)
-        df_EB_VR_EBsetA1B1_EBsetB2C_scenario3[col] \
-            = df_EB_VR_EBsetA1B1_EBsetB2C_scenario3[col].astype(float)
+        df_ER_VR_EBsetA1B1_EBsetB2C_scenario2[col] \
+            = df_ER_VR_EBsetA1B1_EBsetB2C_scenario2[col].astype(float)
+        df_ER_VR_EBsetA1B1_EBsetB2C_scenario3[col] \
+            = df_ER_VR_EBsetA1B1_EBsetB2C_scenario3[col].astype(float)
     
     
     rows_EB_C_B_CC_BB = plot_comparaison_gamma_version_all_scenarios(
-                            df_B_C_BB_CC_EB_M)
+                            df_B_C_BB_CC_ER_M)
     tab_compGammaVersionAllScenario = Panel(child=rows_EB_C_B_CC_BB, 
                                   title="comparison Gamma_version all scenarios")
     print("comparison Gamma_version all scenarios: Terminee")
     
-    rows_EB_CC_BB = plot_comparaison_gamma_version_EB(df_B_C_BB_CC_EB_M)
-    tab_compGammaVersionEB = Panel(child=rows_EB_CC_BB, 
+    rows_EB_CC_BB = plot_comparaison_gamma_version_ER(df_B_C_BB_CC_ER_M)
+    tab_compGammaVersionER = Panel(child=rows_EB_CC_BB, 
                                     title="comparison Gamma_version EB,BB,CC")
-    print("comparison Gamma_version EB,BB,CC : Terminee")
+    print("comparison Gamma_version ER,BB,CC : Terminee")
     
-    rows_B_C = plot_comparaison_gamma_version_BC(df_B_C_BB_CC_EB_M)
+    rows_B_C = plot_comparaison_gamma_version_BC(df_B_C_BB_CC_ER_M)
     tab_compGammaVersionBC = Panel(child=rows_B_C, 
                                     title="comparison Gamma_version B,C")
     print("comparison Gamma_version B,C : Terminee")
     
-    rows_EB_VR_TAU = plot_EB_VR_TAU(df_EB_VR_EBsetA1B1_EBsetB2C_scenario2, 
-                                    df_EB_VR_EBsetA1B1_EBsetB2C_scenario3
+    rows_ER_VR_TAU = plot_ER_VR_TAU(df_ER_VR_EBsetA1B1_EBsetB2C_scenario2, 
+                                    df_ER_VR_EBsetA1B1_EBsetB2C_scenario3
                                     )
-    tabs_EB_VR_TAU = Panel(child=rows_EB_VR_TAU, 
-                           title="EB VR TAU")
-    print("EB VR TAU : TERMINEE")
+    tabs_ER_VR_TAU = Panel(child=rows_ER_VR_TAU, 
+                           title="ER VR TAU")
+    print("ER VR TAU : TERMINEE")
     
     rows_dists_ts = plot_distribution_by_states_4_periods(
-                        df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T,
+                        df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T,
                         dico_SelectGammaVersion=dico_SelectGammaVersion)
     tab_dists_ts = Panel(child=rows_dists_ts, title="distribution by state")
     print("Distribution of players: TERMINEE")
     
-    rows_evol_EB_C_B_CC_BB = plot_evolution_EB_C_B_CC_BB_over_time(
-                                df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T,
+    rows_evol_EB_C_B_CC_BB = plot_evolution_ER_C_B_CC_BB_over_time(
+                                df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T,
                                 algos=algos_to_show, 
                                 dico_SelectGammaVersion=dico_SelectGammaVersion
                                 )
@@ -2604,7 +2604,7 @@ def group_plot_on_panel(df_B_C_BB_CC_EB_M,
     print("evolution of gains : TERMINEE")
     
     rows_evol_situations = plot_evolution_players_by_situation_over_time(
-                            df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T,
+                            df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T,
                             algos=algos_to_show, 
                             dico_SelectGammaVersion=dico_SelectGammaVersion
                             )
@@ -2613,7 +2613,7 @@ def group_plot_on_panel(df_B_C_BB_CC_EB_M,
     print("evolution of Situation  : TERMINEE")
     
     rows_evol_Si = plot_evolution_Si_by_players_over_time(
-                        df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T,
+                        df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T,
                         algos=algos_to_show, 
                         dico_SelectGammaVersion=dico_SelectGammaVersion
                     )
@@ -2622,17 +2622,17 @@ def group_plot_on_panel(df_B_C_BB_CC_EB_M,
     print("evolution of Stocks Si : TERMINEE")
     
     tabs = Tabs(tabs= [ 
-                        tab_compGammaVersionEB,
+                        tab_compGammaVersionER,
                         tab_compGammaVersionBC, 
                         tab_compGammaVersionAllScenario, 
-                        tabs_EB_VR_TAU,
+                        tabs_ER_VR_TAU,
                         tab_dists_ts,
                         tabs_evol_over_time, 
                         tabs_evol_situation_over_time,
                         tabs_evol_Si_over_time
                         ])
     NAME_RESULT_SHOW_VARS 
-    name_result_show_vars = "comparaison_EB_BCBBCC_gammaVersionV5.html"
+    name_result_show_vars = "comparaison_ER_VR_BCBBCC_gammaVersionV5.html"
     output_file( os.path.join(name_dir, name_result_show_vars)  )
     save(tabs)
     show(tabs)
@@ -2709,20 +2709,20 @@ def group_plot_on_panel(df_B_C_BB_CC_EB_M,
 #     save(tabs)
 #     show(tabs)
     
-def DBG_group_plot_on_panel(df_B_C_BB_CC_EB_M, 
-                        df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T,
+def DBG_group_plot_on_panel(df_B_C_BB_CC_ER_M, 
+                        df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T,
                         algos_to_show, 
                         dico_SelectGammaVersion):
     
-    cols = ["B", "C", "BB", "CC", "EB"]
+    cols = ["B", "C", "BB", "CC", "ER"]
     for col in cols:
-        df_B_C_BB_CC_EB_M[col] = df_B_C_BB_CC_EB_M[col].astype(float)
+        df_B_C_BB_CC_ER_M[col] = df_B_C_BB_CC_ER_M[col].astype(float)
     
     cols = ["PROD", "CONS", "b0", "c0", "pi_sg_plus", "pi_sg_minus", 
-            "B", "C", "BB", "CC", "EB"]
+            "B", "C", "BB", "CC", "ER"]
     for col in cols:
-        df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T[col] \
-            = df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T[col].astype(float)
+        df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T[col] \
+            = df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T[col].astype(float)
             
     # rows_evol_EB_C_B_CC_BB = plot_evolution_EB_C_B_CC_BB_over_time(
     #                             df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T,
@@ -2743,7 +2743,7 @@ def DBG_group_plot_on_panel(df_B_C_BB_CC_EB_M,
     # print("evolution of Stocks Si : TERMINEE")
     
     rows_evol_situations = plot_evolution_players_by_situation_over_time(
-                        df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T,
+                        df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T,
                         algos=algos_to_show, 
                         dico_SelectGammaVersion=dico_SelectGammaVersion
                     )
@@ -2758,35 +2758,35 @@ def DBG_group_plot_on_panel(df_B_C_BB_CC_EB_M,
                         tabs_evol_situation_over_time
                         ])
     #NAME_RESULT_SHOW_VARS 
-    name_result_show_vars = "comparaison_EB_BCBBCC_gammaVersionV1.html"
+    name_result_show_vars = "comparaison_ER_BCBBCC_gammaVersionV1.html"
     output_file( os.path.join(name_dir, name_result_show_vars)  )
     #save(tabs)
     show(tabs)
     
-def DBG_EB_R_TAU_on_panel(df_EB_VR_EBsetA1B1_EBsetB2C_scenario2, \
-                          df_EB_VR_EBsetA1B1_EBsetB2C_scenario3):
+def DBG_ER_VR_TAU_on_panel(df_ER_VR_EBsetA1B1_EBsetB2C_scenario2, \
+                          df_ER_VR_EBsetA1B1_EBsetB2C_scenario3):
     
-    cols = ["EB_setA1B1", "EB_setB2C", "EB", "VR"]
+    cols = ["EB_setA1B1", "EB_setB2C", "ER", "VR"]
     for col in cols:
-        df_EB_VR_EBsetA1B1_EBsetB2C_scenario2[col] \
-            = df_EB_VR_EBsetA1B1_EBsetB2C_scenario2[col].astype(float)
-        df_EB_VR_EBsetA1B1_EBsetB2C_scenario3[col] \
-            = df_EB_VR_EBsetA1B1_EBsetB2C_scenario3[col].astype(float)
+        df_ER_VR_EBsetA1B1_EBsetB2C_scenario2[col] \
+            = df_ER_VR_EBsetA1B1_EBsetB2C_scenario2[col].astype(float)
+        df_ER_VR_EBsetA1B1_EBsetB2C_scenario3[col] \
+            = df_ER_VR_EBsetA1B1_EBsetB2C_scenario3[col].astype(float)
             
     
-    rows_EB_VR_TAU = plot_EB_VR_TAU(df_EB_VR_EBsetA1B1_EBsetB2C_scenario2, 
-                                  df_EB_VR_EBsetA1B1_EBsetB2C_scenario3
-                                  )
-    tabs_EB_VR_TAU = Panel(child=rows_EB_VR_TAU, 
-                           title="EB VR TAU")
-    print("EB VR TAU : TERMINEE")
+    rows_ER_VR_TAU = plot_ER_VR_TAU(df_ER_VR_EBsetA1B1_EBsetB2C_scenario2, 
+                                    df_ER_VR_EBsetA1B1_EBsetB2C_scenario3
+                                    )
+    tabs_ER_VR_TAU = Panel(child=rows_ER_VR_TAU, 
+                           title="ER VR TAU")
+    print("ER VR TAU : TERMINEE")
     
     
     tabs = Tabs(tabs= [ 
-                        tabs_EB_VR_TAU
+                        tabs_ER_VR_TAU
                         ])
     #NAME_RESULT_SHOW_VARS 
-    name_result_show_vars = "EB_VR_TAU.html"
+    name_result_show_vars = "ER_VR_TAU.html"
     output_file( os.path.join(name_dir, name_result_show_vars)  )
     #save(tabs)
     show(tabs)
@@ -2877,9 +2877,9 @@ if __name__ == "__main__":
     print("get_k_stop_4_periods: TERMINE") 
     
     tuple_paths = list(set(tuple_paths))
-    df_EB_VR_EBsetA1B1_EBsetB2C_scenario2, \
-    df_EB_VR_EBsetA1B1_EBsetB2C_scenario3 \
-        = get_df_EB_VR_EBsetA1B1_EBsetB2C_merge_all(
+    df_ER_VR_EBsetA1B1_EBsetB2C_scenario2, \
+    df_ER_VR_EBsetA1B1_EBsetB2C_scenario3 \
+        = get_df_ER_VR_EBsetA1B1_EBsetB2C_merge_all(
             tuple_paths=tuple_paths, 
             scenarios=["scenario2", "scenario3"])
     
@@ -2888,8 +2888,8 @@ if __name__ == "__main__":
     
     tuple_paths = list(set(tuple_paths))
     df_arr_M_T_Ks, df_ben_cst_M_T_K, \
-    df_b0_c0_pisg_pi0_T_K, df_B_C_BB_CC_EB_M, \
-    df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T \
+    df_b0_c0_pisg_pi0_T_K, df_B_C_BB_CC_ER_M, \
+    df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T \
         = get_array_turn_df_for_t(tuple_paths, df_LRI_12_stop, 
                                   t=None, k_steps_args=k_steps, 
                                   nb_sub_dir=nb_sub_dir)    
@@ -2901,9 +2901,9 @@ if __name__ == "__main__":
     print("df_b0_c0_pisg_pi0_T_K={} Mo".format(
             round(df_b0_c0_pisg_pi0_T_K.memory_usage().sum()/(1024*1024), 2)))
     print("df_B_C_BB_CC_EB_M={} Mo".format(
-            round(df_B_C_BB_CC_EB_M.memory_usage().sum()/(1024*1024), 2)))
-    print("df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T={} Mo".format(
-            round(df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T.memory_usage().sum()/(1024*1024), 2)))
+            round(df_B_C_BB_CC_ER_M.memory_usage().sum()/(1024*1024), 2)))
+    print("df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T={} Mo".format(
+            round(df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T.memory_usage().sum()/(1024*1024), 2)))
     
    
     algos_to_show= list(dico_SelectGammaVersion.keys()) # ["LRI1", "Selfish-DETERMINIST", "LRI2", "Systematic-DETERMINIST"];
@@ -2911,10 +2911,10 @@ if __name__ == "__main__":
     scenarios_to_show=[];
    
     group_plot_on_panel(
-        df_B_C_BB_CC_EB_M=df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T, 
-        df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T=df_B_C_BB_CC_EB_CONS_PROD_b0_c0_pisg_M_T,
-        df_EB_VR_EBsetA1B1_EBsetB2C_scenario2=df_EB_VR_EBsetA1B1_EBsetB2C_scenario2,
-        df_EB_VR_EBsetA1B1_EBsetB2C_scenario3=df_EB_VR_EBsetA1B1_EBsetB2C_scenario3, 
+        df_B_C_BB_CC_ER_M=df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T, 
+        df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T=df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T,
+        df_ER_VR_EBsetA1B1_EBsetB2C_scenario2=df_ER_VR_EBsetA1B1_EBsetB2C_scenario2,
+        df_ER_VR_EBsetA1B1_EBsetB2C_scenario3=df_ER_VR_EBsetA1B1_EBsetB2C_scenario3, 
         algos_to_show=algos_to_show,
         dico_SelectGammaVersion=dico_SelectGammaVersion)
     
