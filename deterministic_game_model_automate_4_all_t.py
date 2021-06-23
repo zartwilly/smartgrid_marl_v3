@@ -478,8 +478,8 @@ def determinist_balanced_player_game(arr_pl_M_T_vars_init,
                 (arr_pl_M_T_vars_modif[:, 0, fct_aux.AUTOMATE_INDEX_ATTRS['set']] == "setB2" ) | 
                 (arr_pl_M_T_vars_modif[:, 0, fct_aux.AUTOMATE_INDEX_ATTRS['set']] == "setC" )
                 ).reshape(-1).tolist()
-        EB_setA1B1_det = np.sum(RU_is_M[setA1B1], axis=0)
-        EB_setB2C_det = np.sum(RU_is_M[setB2C], axis=0)
+        EB_setA1B1_det = np.sum(EB_is_M[setA1B1], axis=0)
+        EB_setB2C_det = np.sum(EB_is_M[setB2C], axis=0)
         dico_EB_R_EBsetA1B1_EBsetB2C = {"EB_setA1B1":[EB_setA1B1_det], 
                                          "EB_setB2C":[EB_setB2C_det], 
                                          "ER":[ER], "VR":[VR]}
