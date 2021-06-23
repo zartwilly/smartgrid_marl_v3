@@ -88,8 +88,8 @@ if __name__ == "__main__":
     
     date_hhmm="DDMM_HHMM"
     t_periods = 1 #50 #30 #35 #55 #117 #15 #3
-    k_steps = 25 #50000 #250 #5000 #2000 #50 #250
-    NB_REPEAT_K_MAX= 3 #10 #3 #15 #30
+    k_steps = 10000 #50000 #250 #5000 #2000 #50 #250
+    NB_REPEAT_K_MAX= 10 #3 #15 #30
     learning_rates = [0.01]#[0.1] #[0.001]#[0.00001] #[0.01] #[0.0001]
     fct_aux.N_DECIMALS = 8
     dico_phiname_ab = {"A1B1": {"a":1, "b":1}, "A1.2B0.8": {"a":1.2, "b":0.8}}
@@ -98,7 +98,7 @@ if __name__ == "__main__":
     pi_hp_minus = [30] #[20] #[0.33] #[15, 5]
     fct_aux.PI_0_PLUS_INIT = 4 #20 #4
     fct_aux.PI_0_MINUS_INIT = 3 #10 #3
-    NB_INSTANCES = 30 #50
+    NB_INSTANCES = 50
             
     algos = fct_aux.ALGO_NAMES_LRIx \
             + fct_aux.ALGO_NAMES_DET \
@@ -149,7 +149,8 @@ if __name__ == "__main__":
     )
     # multi processing execution
     
-    
+    # merge all Cx
+    # TODO: merge all files into xls file
     
     print("Multi process running time ={}".format(time.time()-ti))
     
