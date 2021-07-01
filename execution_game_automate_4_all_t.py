@@ -543,6 +543,7 @@ def execute_algos_used_Generated_instances_N_INSTANCES_MULTI(arr_pl_M_T_vars_ini
     profils_stabilisation_LRI2 = None; profils_NH = None; 
     k_stop_learning_LRI2 = None; Perf_sum_Vi_LRI2 = None;
     Perf_best_profils_bf = None; nb_best_profils_bf = None;
+    Perf_bad_profils_bf = None; nb_bad_profils_bf = None;
     Perf_bad_profils_NH = None; nb_bad_profils_NH = None;
     
     for (algo_name, (pi_hp_plus_elt, pi_hp_minus_elt), 
@@ -650,6 +651,8 @@ def execute_algos_used_Generated_instances_N_INSTANCES_MULTI(arr_pl_M_T_vars_ini
                                 criteria_bf=criteria_bf, dbg=debug)
             nb_best_profils_bf = dico_best_profils_bf["nb_best_profils"]
             Perf_best_profils_bf = dico_best_profils_bf["Perfs"]
+            nb_bad_profils_bf = dico_bad_profils_bf["nb_bad_profils"]
+            Perf_bad_profils_bf = dico_bad_profils_bf["Perfs"]
                             
                            
         elif algo_name in fct_aux.ALGO_NAMES_NASH :
@@ -696,7 +699,8 @@ def execute_algos_used_Generated_instances_N_INSTANCES_MULTI(arr_pl_M_T_vars_ini
         elif tuple(profils_stabilisation_LRI2) not in profils_NH:
             C3 = False
     C5 = Perf_sum_Vi_LRI2
-    C6 = Perf_best_profils_bf[0] if nb_best_profils_bf > 0 else None 
+    C6 = Perf_best_profils_bf[0] if nb_best_profils_bf > 0 else None
+    C9 = Perf_bad_profils_bf[0] if nb_bad_profils_bf > 0 else None
     if C1:
         C7 = Perf_bad_profils_NH[0] if nb_bad_profils_NH > 0 else None
         
@@ -715,7 +719,7 @@ def execute_algos_used_Generated_instances_N_INSTANCES_MULTI(arr_pl_M_T_vars_ini
     
     
     Cx={"C1":[C1], "C2":[C2], "C3":[C3], "C4":[C4], 
-        "C5":[C5], "C6":[C6], "C7":[C7], 
+        "C5":[C5], "C6":[C6], "C7":[C7], "C9":[C9],
         "check_C5_inf_C6":[check_C5_inf_C6], 
         "check_C7_inf_C6":[check_C7_inf_C6]}
     
