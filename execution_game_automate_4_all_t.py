@@ -700,8 +700,24 @@ def execute_algos_used_Generated_instances_N_INSTANCES_MULTI(arr_pl_M_T_vars_ini
     if C1:
         C7 = Perf_bad_profils_NH[0] if nb_bad_profils_NH > 0 else None
         
+    check_C5_inf_C6 = None
+    if C5 <= C6 and C5 is not None and C6 is not None:
+        check_C5_inf_C6 = "OK"
+    else:
+        check_C5_inf_C6 = "NOK"
+    check_C7_inf_C6 = None
+    if C7 <= C6 and C7 is not None and C6 is not None:
+        check_C7_inf_C6 = "OK"
+    else:
+        check_C7_inf_C6 = "NOK"
+            
+    
+    
+    
     Cx={"C1":[C1], "C2":[C2], "C3":[C3], "C4":[C4], 
-        "C5":[C5], "C6":[C6], "C7":[C7]}
+        "C5":[C5], "C6":[C6], "C7":[C7], 
+        "check_C5_inf_C6":[check_C5_inf_C6], 
+        "check_C7_inf_C6":[check_C7_inf_C6]}
     
     path_to_save = name_dir.split(os.sep)[0:2]
     path_to_save.append("save_all_instances")
