@@ -21,7 +21,7 @@ import numpy as np
 import fonctions_auxiliaires as fct_aux
 
 K_STEPS_MAX = 50000
-NB_INSTANCES = 30
+NB_INSTANCES = 50
 
 def resume_stat_N_instances(df, path_2_dir_ROOT):
     ids = df[df.C4 == K_STEPS_MAX-1].index
@@ -81,7 +81,7 @@ if __name__ == "__main__":
     ti = time.time()
     
     phi_name = "A1B1"
-    learning_rate = 0.01; ksteps = 25 # 10000 : valeur dans run_game_ATMATE_MULTI_PROCESS_1t_N_instances
+    learning_rate = 0.01; ksteps = K_STEPS_MAX # 10000 : valeur dans run_game_ATMATE_MULTI_PROCESS_1t_N_instances
     gamma_version = -2; kstoplearn = fct_aux.STOP_LEARNING_PROBA
     name_rep = phi_name+"OnePeriod_50instances_ksteps"\
                         +str(ksteps)\
