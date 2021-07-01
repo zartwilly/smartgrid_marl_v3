@@ -16,6 +16,63 @@ import fonctions_auxiliaires as fct_aux
 
 from pathlib import Path
 
+# _________                 merge Cx : debut                       ___________
+def resume_stat_N_instances(df, path_2_dir_ROOT, k_steps_max, nb_instances):
+    ids = df[df.C4 == k_steps_max-1].index
+    df.loc[ids, "C2"] = False
+    
+    ids = df[~((df.C1 == True) & (df.C2 == True))].index
+    df.loc[ids, "C3"] = None
+    
+    # % de OUI dans C1
+    percent_OUI_C1 = round(df[df.C1 == True].C1.count()/nb_instances, 3)
+    
+    # % de OUI dans C2
+    percent_OUI_C2 = round(df[df.C2 == True].C2.count()/nb_instances, 3)
+    
+    # % de OUI dans C3
+    s_C3 = df.C3.dropna()
+    percent_OUI_C3 = None
+    if s_C3.size == 0:
+        percent_OUI_C3 = 0
+    else:
+        percent_OUI_C3 = round(s_C3[s_C3 == 1.0].count()/s_C3.count(), 3)
+        
+    
+    # C4: moy du nombre d'etapes stabilisées dans C2
+    mean_C4 = df[(df.C2 == True)].C4.mean()
+    if np.isnan(mean_C4):
+        mean_C4 = 0
+    
+    # moy des Perfs de RF
+    mean_perf_C5 = df.C5.mean()
+    
+    # moy des perfs de BF
+    mean_perf_C6 = df.C6.mean()
+    
+    # moy de ceux ayant un equilibre de Nash cad C1 = True
+    mean_Perf_C7 = df[df.C1 == True].C7.mean()
+    
+    dico = {"percent_OUI_C1": [percent_OUI_C1], 
+            "percent_OUI_C2": [percent_OUI_C2],
+            "percent_OUI_C3": [percent_OUI_C3],
+            "mean_C4": [mean_C4],
+            "mean_perf_C5": [mean_perf_C5],
+            "mean_perf_C6": [mean_perf_C6], 
+            "mean_Perf_C7": [mean_Perf_C7]
+            }
+    
+    df_res = pd.DataFrame(dico).T
+    df_res.columns = ["value"]
+    
+    df_res.to_excel(os.path.join(path_2_dir_ROOT, 
+                                 "resume_stat_50_instances.xlsx"))
+    
+    df.to_excel(os.path.join(path_2_dir_ROOT, 
+                             "RESUME_50_INSTANCES.xlsx"))
+# _________                 merge Cx : fin                       ___________
+
+    
 # _________             define paramters of main : debut            ___________
 def define_parameters_MULTI_gammaV_instances_phiname_arrplMTVars(dico_params):
     params = []
@@ -36,16 +93,29 @@ def define_parameters_MULTI_gammaV_instances_phiname_arrplMTVars(dico_params):
                     "OnePeriod_"+str(dico_params["nb_instances"])+"instances"+"GammaV"+str(gamma_version))
             
             for numero_instance in range(0, dico_params["nb_instances"]):
-                arr_pl_M_T_vars_init \
-                    = fct_aux.get_or_create_instance_Pi_Ci_one_period_doc23(
-                        dico_params["setA_m_players"], 
-                        dico_params["setB_m_players"], 
-                        dico_params["setC_m_players"], 
-                        dico_params["t_periods"], 
-                        dico_params["scenario"],
-                        dico_params["scenario_name"],
-                        dico_params["path_to_arr_pl_M_T"], 
-                        dico_params["used_instances"])
+                arr_pl_M_T_vars_init = None
+                if dico_params["doc_VALUES"]==23:
+                    arr_pl_M_T_vars_init \
+                        = fct_aux.get_or_create_instance_Pi_Ci_one_period_doc23(
+                            dico_params["setA_m_players"], 
+                            dico_params["setB_m_players"], 
+                            dico_params["setC_m_players"], 
+                            dico_params["t_periods"], 
+                            dico_params["scenario"],
+                            dico_params["scenario_name"],
+                            dico_params["path_to_arr_pl_M_T"], 
+                            dico_params["used_instances"])
+                elif dico_params["doc_VALUES"]==24:
+                    arr_pl_M_T_vars_init \
+                        = fct_aux.get_or_create_instance_Pi_Ci_one_period_doc24(
+                            dico_params["setA_m_players"], 
+                            dico_params["setB_m_players"], 
+                            dico_params["setC_m_players"], 
+                            dico_params["t_periods"], 
+                            dico_params["scenario"],
+                            dico_params["scenario_name"],
+                            dico_params["path_to_arr_pl_M_T"], 
+                            dico_params["used_instances"])
                     
                 date_hhmm_new = "_".join([date_hhmm, str(numero_instance), 
                                           "t", str(dico_params["t_periods"])])
@@ -88,7 +158,7 @@ if __name__ == "__main__":
     
     date_hhmm="DDMM_HHMM"
     t_periods = 1 #50 #30 #35 #55 #117 #15 #3
-    k_steps = 10000 #50000 #250 #5000 #2000 #50 #250
+    k_steps = 50000 #250 #5000 #2000 #50 #250
     NB_REPEAT_K_MAX= 10 #3 #15 #30
     learning_rates = [0.01]#[0.1] #[0.001]#[0.00001] #[0.01] #[0.0001]
     fct_aux.N_DECIMALS = 8
@@ -98,6 +168,7 @@ if __name__ == "__main__":
     pi_hp_minus = [30] #[20] #[0.33] #[15, 5]
     fct_aux.PI_0_PLUS_INIT = 4 #20 #4
     fct_aux.PI_0_MINUS_INIT = 3 #10 #3
+    doc_VALUES = 24
     NB_INSTANCES = 50
             
     algos = fct_aux.ALGO_NAMES_LRIx \
@@ -111,6 +182,7 @@ if __name__ == "__main__":
     setA_m_players, setB_m_players, setC_m_players = 10, 6, 5                  # 21 players 
     setA_m_players, setB_m_players, setC_m_players = 8, 4, 4                   # 16 players
     setA_m_players, setB_m_players, setC_m_players = 6, 3, 3                   # 12 players
+    setA_m_players, setB_m_players, setC_m_players = 4, 3, 3                   # 10 players
                       
     scenario_name = "scenarioOnePeriod"
     scenario = None
@@ -120,7 +192,7 @@ if __name__ == "__main__":
     
     gamma_versions = [-2] #-1 : random normal distribution, 0: not stock anticipation, -2: normal distribution with proba ppi_k
     
-    dico_params = {"dico_phiname_ab":dico_phiname_ab, 
+    dico_params = {"dico_phiname_ab":dico_phiname_ab, "doc_VALUES":doc_VALUES,
         "gamma_versions":gamma_versions,
         "nb_instances":NB_INSTANCES,
         "criteria_bf":criteria_bf, "used_storage_det":used_storage_det,
@@ -150,7 +222,35 @@ if __name__ == "__main__":
     # multi processing execution
     
     # merge all Cx
-    # TODO: merge all files into xls file
+    
+    for gamma_version, learning_rate in zip(gamma_versions, learning_rates):
+        for phi_name_ab, dico_ab in dico_phiname_ab.items():
+            #phi_name = "A1B1"
+            name_rep = phi_name_ab+"OnePeriod_50instances_ksteps"\
+                                +str(k_steps)\
+                                +"_b"+str(learning_rate)\
+                                +"_kstoplearn"+str(fct_aux.STOP_LEARNING_PROBA)
+                                
+            path_2_dir_ROOT = os.path.join("tests", name_rep)
+            file_2_save_all_instances = "save_all_instances"
+            path_2_dir = os.path.join(path_2_dir_ROOT,
+                                      file_2_save_all_instances)
+            files_csv = os.listdir(path_2_dir)
+            
+            name_cols = [fct_aux.name_cols_CX["C1"], fct_aux.name_cols_CX["C2"], 
+                         fct_aux.name_cols_CX["C3"], fct_aux.name_cols_CX["C4"], 
+                         fct_aux.name_cols_CX["C5"], fct_aux.name_cols_CX["C6"], 
+                         fct_aux.name_cols_CX["C7"], 
+                         fct_aux.name_cols_CX["C9"], 
+                         fct_aux.name_cols_CX["check_C5_inf_C6"], 
+                         fct_aux.name_cols_CX["check_C7_inf_C6"] ] 
+            df = pd.DataFrame(columns=name_cols)
+            for file_csv in files_csv:
+                df_tmp = pd.read_csv(os.path.join(path_2_dir, file_csv), index_col=0)
+                df = pd.concat([df, df_tmp])
+            
+            resume_stat_N_instances(df=df, path_2_dir_ROOT=path_2_dir_ROOT, 
+                                    k_steps_max=k_steps, nb_instances=NB_INSTANCES)
     
     print("Multi process running time ={}".format(time.time()-ti))
     
