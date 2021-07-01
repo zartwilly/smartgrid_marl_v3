@@ -717,11 +717,12 @@ def execute_algos_used_Generated_instances_N_INSTANCES_MULTI(arr_pl_M_T_vars_ini
             
     
     
-    
-    Cx={"C1":[C1], "C2":[C2], "C3":[C3], "C4":[C4], 
-        "C5":[C5], "C6":[C6], "C7":[C7], "C9":[C9],
-        "check_C5_inf_C6":[check_C5_inf_C6], 
-        "check_C7_inf_C6":[check_C7_inf_C6]}
+    Cx={fct_aux.name_cols_CX["C1"]:[C1], fct_aux.name_cols_CX["C2"]:[C2], 
+        fct_aux.name_cols_CX["C3"]:[C3], fct_aux.name_cols_CX["C4"]:[C4], 
+        fct_aux.name_cols_CX["C5"]:[C5], fct_aux.name_cols_CX["C6"]:[C6], 
+        fct_aux.name_cols_CX["C7"]:[C7], fct_aux.name_cols_CX["C9"]:[C9],
+        fct_aux.name_cols_CX["check_C5_inf_C6"]:[check_C5_inf_C6], 
+        fct_aux.name_cols_CX["check_C7_inf_C6"]:[check_C7_inf_C6]}
     
     path_to_save = name_dir.split(os.sep)[0:2]
     path_to_save.append("save_all_instances")
