@@ -1196,6 +1196,7 @@ def lri_balanced_player_game_all_pijk_upper_08(arr_pl_M_T_vars_init,
     pi_sg_plus_t_minus_1, pi_sg_minus_t_minus_1 = None, None
     pi_sg_plus_t, pi_sg_minus_t = None, None
         
+    dico_maxS1S2_T = dict()
     dico_stats_res = dict()
     dico_k_stop_learnings = dict()
     for t in range(0, t_periods):
@@ -1278,6 +1279,8 @@ def lri_balanced_player_game_all_pijk_upper_08(arr_pl_M_T_vars_init,
         arr_bg_i_nb_repeat_k.fill(np.nan)
         
         # ____   run balanced sg for one period and all k_steps : debut   _____
+        k_10 = int(k_steps/10)
+        dico_maxS1S2_T["t"+str(t)] = [np.nan] * k_10
         dico_gamma_players_t = dict()
         bool_stop_learning = False
         k_stop_learning = 0
@@ -1402,6 +1405,14 @@ def lri_balanced_player_game_all_pijk_upper_08(arr_pl_M_T_vars_init,
                                                        fct_aux.NB_REPEAT_K_MAX)
                                                 )
                 arr_bg_i_nb_repeat_k.fill(np.nan)
+                
+            if k % k_10 == 0 and k != 0:
+                m_j_k10 = arr_pl_M_T_K_vars_modif[:,t,k-k_10:k, 
+                                                  [fct_aux.AUTOMATE_INDEX_ATTRS["S1_p_i_j_k"], 
+                                                   fct_aux.AUTOMATE_INDEX_ATTRS["S2_p_i_j_k"]]
+                                                  ].T.max(2).mean(axis=0).mean()
+                #print("int(k/k_10)={}".format(int(k/k_10)))
+                dico_maxS1S2_T["t"+str(t)][int(k/k_10)-1] = m_j_k10
         
         ## select modes and compute ben,cst at k_stop_learning
         k_stop_learning = k-1 #if k < k_steps else k_steps-1
@@ -1505,6 +1516,12 @@ def lri_balanced_player_game_all_pijk_upper_08(arr_pl_M_T_vars_init,
     # _____        save computed variables locally: debut        ______________
     algo_name = "LRI1" if utility_function_version == 1 else "LRI2"
     Path(path_to_save).mkdir(parents=True, exist_ok=True)
+    pd.DataFrame(dico_maxS1S2_T).to_csv(
+        os.path.join(
+                *[path_to_save,
+                  "moyenne_max_btwS1S2_k10_{}.csv".format(algo_name)]), 
+                index=False
+        )
     # df_nash.to_excel(os.path.join(
     #             *[path_to_save,
     #               "resume_verify_Nash_equilibrium_{}.xlsx".format(algo_name)]), 
