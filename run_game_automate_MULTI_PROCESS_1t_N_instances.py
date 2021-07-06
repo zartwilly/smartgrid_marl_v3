@@ -158,8 +158,8 @@ if __name__ == "__main__":
     
     date_hhmm="DDMM_HHMM"
     t_periods = 1 #50 #30 #35 #55 #117 #15 #3
-    k_steps = 50000 #250 #5000 #2000 #50 #250
-    NB_REPEAT_K_MAX= 10 #3 #15 #30
+    k_steps = 100 #250 #50000 #250 #5000 #2000 #50 #250
+    NB_REPEAT_K_MAX= 3 #10 #3 #15 #30
     learning_rates = [0.01]#[0.1] #[0.001]#[0.00001] #[0.01] #[0.0001]
     fct_aux.N_DECIMALS = 8
     dico_phiname_ab = {"A1B1": {"a":1, "b":1}, "A1.2B0.8": {"a":1.2, "b":0.8}}
@@ -169,12 +169,16 @@ if __name__ == "__main__":
     fct_aux.PI_0_PLUS_INIT = 4 #20 #4
     fct_aux.PI_0_MINUS_INIT = 3 #10 #3
     doc_VALUES = 24
-    NB_INSTANCES = 50
+    NB_INSTANCES = 10 #50
             
+    # algos = fct_aux.ALGO_NAMES_LRIx \
+    #         + fct_aux.ALGO_NAMES_DET \
+    #         + fct_aux.ALGO_NAMES_BF \
+    #         + fct_aux.ALGO_NAMES_NASH 
     algos = fct_aux.ALGO_NAMES_LRIx \
             + fct_aux.ALGO_NAMES_DET \
-            + fct_aux.ALGO_NAMES_BF \
-            + fct_aux.ALGO_NAMES_NASH 
+            + [fct_aux.ALGO_NAMES_BF[1]] 
+            
     
             
     # ---- initialization of variables for generating instances ----
@@ -182,7 +186,7 @@ if __name__ == "__main__":
     setA_m_players, setB_m_players, setC_m_players = 10, 6, 5                  # 21 players 
     setA_m_players, setB_m_players, setC_m_players = 8, 4, 4                   # 16 players
     setA_m_players, setB_m_players, setC_m_players = 6, 3, 3                   # 12 players
-    setA_m_players, setB_m_players, setC_m_players = 4, 3, 3                   # 10 players
+    #setA_m_players, setB_m_players, setC_m_players = 4, 3, 3                   # 10 players
                       
     scenario_name = "scenarioOnePeriod"
     scenario = None
@@ -213,16 +217,23 @@ if __name__ == "__main__":
     params = define_parameters_MULTI_gammaV_instances_phiname_arrplMTVars(dico_params)
     print("define parameters finished")
     
+    # # multi processing execution
+    # p = mp.Pool(mp.cpu_count()-1)
+    # p.starmap(
+    #     autoExeGame4T.execute_algos_used_Generated_instances_N_INSTANCES_MULTI,
+    #     params
+    # )
+    # # multi processing execution
+    
     # multi processing execution
     p = mp.Pool(mp.cpu_count()-1)
     p.starmap(
-        autoExeGame4T.execute_algos_used_Generated_instances_N_INSTANCES_MULTI,
+        autoExeGame4T.execute_BF_NH_algos_used_Generated_instances_N_INSTANCES_MULTI,
         params
     )
     # multi processing execution
     
     # merge all Cx
-    
     for gamma_version, learning_rate in zip(gamma_versions, learning_rates):
         for phi_name_ab, dico_ab in dico_phiname_ab.items():
             #phi_name = "A1B1"
