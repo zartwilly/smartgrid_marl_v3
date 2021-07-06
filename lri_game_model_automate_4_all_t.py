@@ -1280,7 +1280,7 @@ def lri_balanced_player_game_all_pijk_upper_08(arr_pl_M_T_vars_init,
         
         # ____   run balanced sg for one period and all k_steps : debut   _____
         k_10 = int(k_steps/10)
-        dico_maxS1S2_T["t"+str(t)] = [np.nan] * k_10
+        dico_maxS1S2_T["t"+str(t)] = [np.nan] * (k_10+1)
         dico_gamma_players_t = dict()
         bool_stop_learning = False
         k_stop_learning = 0
@@ -1411,7 +1411,7 @@ def lri_balanced_player_game_all_pijk_upper_08(arr_pl_M_T_vars_init,
                                                   [fct_aux.AUTOMATE_INDEX_ATTRS["S1_p_i_j_k"], 
                                                    fct_aux.AUTOMATE_INDEX_ATTRS["S2_p_i_j_k"]]
                                                   ].T.max(2).mean(axis=0).mean()
-                #print("int(k/k_10)={}".format(int(k/k_10)))
+                #print("int(k/k_10)={}, k={}, k_10={}".format(int(k/k_10), k, k_10))
                 dico_maxS1S2_T["t"+str(t)][int(k/k_10)-1] = m_j_k10
         
         ## select modes and compute ben,cst at k_stop_learning
