@@ -2330,6 +2330,7 @@ def plot_evolution_DIFFERENCE_players_by_situation_for_time(df_al_pr_ra_sc_gam,
         tooltips.append((setx+"Players","@"+setx+"Players"))
     tooltips.append(("t", "@t"))
     TOOLS[7] = HoverTool(tooltips= tooltips)
+
     px= figure(x_range=FactorRange(*t_setX), 
                plot_height=350, plot_width = int(WIDTH*MULT_WIDTH),
                title="number of players, ({}, {}, {}, rate={}, price={})".format(
