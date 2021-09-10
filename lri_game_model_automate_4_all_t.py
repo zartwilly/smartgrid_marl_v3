@@ -1102,6 +1102,42 @@ def turn_dico_stats_res_into_df_LRI(arr_pl_M_T_K_vars_modif, t_periods,
     return df
 # ______________   turn dico stats into df  -->  fin    ______________________
 
+# ________________   save array at period t : debut   _________________________
+def save_array_period_t(arr_pl_M_t_K_vars_modif, df_nash_t, t, k,
+                        algo_name, path_to_save, runtime):
+    """
+    save arrays at each period t
+    """
+    directory = "array_by_period"; sub_directory = "array_by_kstep"
+    path_to_save = path_to_save \
+                        if path_to_save != "tests" \
+                        else os.path.join(
+                                    path_to_save, 
+                                    algo_name+"_simu_"+datetime.now()\
+                                        .strftime("%d%m_%H%M"))
+    Path(path_to_save).mkdir(parents=True, exist_ok=True)
+    Path(os.path.join(path_to_save, directory)).mkdir(parents=True, exist_ok=True)
+    
+    runtime = round(runtime, 2)
+    
+    if t is not None and k is None:
+        np.save(os.path.join(path_to_save, directory, 
+                             "arr_pl_M_t_{}_K_vars_time_{}.npy".format(t, runtime)), 
+                arr_pl_M_t_K_vars_modif)
+        
+        df_nash_t.to_csv(os.path.join(
+                    path_to_save, directory, 
+                    "resume_verify_Nash_equilibrium_t_{}_{}.csv".format(t,algo_name)), 
+                    index=False )
+    elif t is not None and k is not None:
+        Path(os.path.join(path_to_save, directory, sub_directory))\
+            .mkdir(parents=True, exist_ok=True)
+        np.save(os.path.join(path_to_save, directory, sub_directory,
+                             "arr_pl_M_t_{}_k_{}_time_{}vars.npy".format(t, k, runtime)), 
+                arr_pl_M_t_K_vars_modif)
+    
+    pass
+# ________________   save array at period t : debut   _________________________
 
 ###############################################################################
 #                   definition  de l algo LRI
@@ -1124,6 +1160,8 @@ def lri_balanced_player_game_all_pijk_upper_08(arr_pl_M_T_vars_init,
     algorithm LRI with stopping learning when all players p_i_j_ks are higher 
     than STOP_LEARNING_PROBA = 0.8
     """
+    algo_name = "LRI1" if utility_function_version == 1 else "LRI2"
+    
     
     m_players = arr_pl_M_T_vars_init.shape[0]
     t_periods = arr_pl_M_T_vars_init.shape[1]
@@ -1201,6 +1239,7 @@ def lri_balanced_player_game_all_pijk_upper_08(arr_pl_M_T_vars_init,
     dico_k_stop_learnings = dict()
     for t in range(0, t_periods):
         print("******* t = {} BEGIN *******".format(t))
+        ti_t = time.time()
         
         nb_max_reached_repeat_k_per_t = 0
         if manual_debug:
@@ -1289,6 +1328,8 @@ def lri_balanced_player_game_all_pijk_upper_08(arr_pl_M_T_vars_init,
         while k<k_steps and not bool_stop_learning:
             print(" -------  k = {}, nb_repeat_k = {}  ------- ".format(k, 
                     nb_repeat_k)) if k%50 == 0 else None
+            
+            ti_tk = time.time()
             
             ### balanced_player_game_t
             random_mode = True
@@ -1381,6 +1422,15 @@ def lri_balanced_player_game_all_pijk_upper_08(arr_pl_M_T_vars_init,
                                                        fct_aux.NB_REPEAT_K_MAX)
                                                 )
                 arr_bg_i_nb_repeat_k.fill(np.nan)
+                
+                # save array at k_step and t
+                arr_pl_M_t_k_vars_modif = arr_pl_M_T_K_vars_modif[:,t,k-1,:]
+                save_array_period_t(arr_pl_M_t_K_vars_modif=arr_pl_M_t_k_vars_modif,
+                                    df_nash_t=None,
+                                    t=t, k=k,
+                                    algo_name=algo_name,
+                                    path_to_save=path_to_save,
+                                    runtime=time.time()-ti_tk)
             
             else:
                 arr_pl_M_T_K_vars_modif[:,t,k,:] \
@@ -1406,6 +1456,15 @@ def lri_balanced_player_game_all_pijk_upper_08(arr_pl_M_T_vars_init,
                                                 )
                 arr_bg_i_nb_repeat_k.fill(np.nan)
                 
+                # save array at k_step and t
+                arr_pl_M_t_k_vars_modif = arr_pl_M_T_K_vars_modif[:,t,k-1,:]
+                save_array_period_t(arr_pl_M_t_K_vars_modif=arr_pl_M_t_k_vars_modif,
+                                    df_nash_t=None,
+                                    t=t, k=k,
+                                    algo_name=algo_name,
+                                    path_to_save=path_to_save,
+                                    runtime=time.time()-ti_tk)
+                
             if k % k_10 == 0 and k != 0:
                 m_j_k10 = arr_pl_M_T_K_vars_modif[:,t,k-k_10:k, 
                                                   [fct_aux.AUTOMATE_INDEX_ATTRS["S1_p_i_j_k"], 
@@ -1413,6 +1472,7 @@ def lri_balanced_player_game_all_pijk_upper_08(arr_pl_M_T_vars_init,
                                                   ].T.max(2).mean(axis=0).mean()
                 #print("int(k/k_10)={}, k={}, k_10={}".format(int(k/k_10), k, k_10))
                 dico_maxS1S2_T["t"+str(t)][int(k/k_10)-1] = m_j_k10
+        
         
         ## select modes and compute ben,cst at k_stop_learning
         k_stop_learning = k-1 #if k < k_steps else k_steps-1
@@ -1474,6 +1534,16 @@ def lri_balanced_player_game_all_pijk_upper_08(arr_pl_M_T_vars_init,
         df_nash = pd.merge(df_nash, df_nash_t, on='players', how='outer')
         
         # ____   run balanced sg for one period and all k_steps : fin     _____
+        
+        # ____              save array at period t : debut                ____
+        arr_pl_M_t_K_vars_modif = arr_pl_M_T_K_vars_modif[:,t, :k_stop_learning,:]
+        save_array_period_t(arr_pl_M_t_K_vars_modif=arr_pl_M_t_K_vars_modif,
+                            df_nash_t=df_nash_t,
+                            t=t, k=None,
+                            algo_name=algo_name,
+                            path_to_save=path_to_save, 
+                            runtime=time.time()-ti_t)
+        # ____              save array at period t : fin                  ____
         
     # ____          run balanced sg for all t_periods : fin           ________
     
