@@ -305,6 +305,10 @@ if __name__ == "__main__":
     setA_m_players_23 = 10; setB1_m_players_23 = 3; 
     setB2_m_players_23 = 5; setC_m_players_23 = 8;                             # 26 players
     setA_m_players_1 = 10; setC_m_players_1 = 10;                              # 20 players
+    
+    # setA_m_players_23 = 4; setB1_m_players_23 = 1; 
+    # setB2_m_players_23 = 1; setC_m_players_23 = 3;                             # 10 players
+    # setA_m_players_1 = 5; setC_m_players_1 = 5;                              # 20 players
    
     # _____                     scenarios --> debut                 __________
     doc_VALUES = 23 #17 #19; # 15: doc version 15, 16: doc version 16, 17: doc version 17, 18: doc version 18 only scenario1, 19: valeurs données par reunion ZOOM "fait le point" 
@@ -606,8 +610,8 @@ if __name__ == "__main__":
         nb_periods = None
         # ---- new constances simu_DDMM_HHMM --- **** debug *****
         date_hhmm = "DDMM_HHMM"
-        t_periods = 20 #50 #20 #50 #10 #30 #50 #30 #35 #55 #117 #15 #3
-        k_steps = 2000 #250 #250 #5 #100 #250 #5000 #2000 #50 #250
+        t_periods = 20 #20 #50 #20 #50 #10 #30 #50 #30 #35 #55 #117 #15 #3
+        k_steps = 1000 #550 #2000 #250 #250 #5 #100 #250 #5000 #2000 #50 #250
         NB_REPEAT_K_MAX= 3 #10 #3 #15 #30
         learning_rates = [0.1]#[0.1] #[0.001]#[0.00001] #[0.01] #[0.0001]
         fct_aux.N_DECIMALS = 8
@@ -620,7 +624,7 @@ if __name__ == "__main__":
         tuple_pi_hp_plus_minus = tuple(zip(pi_hp_plus, pi_hp_minus))
         
         algos = fct_aux.ALGO_NAMES_DET + fct_aux.ALGO_NAMES_LRIx                #["LRI1", "LRI2", "Selfish-DETERMINIST"]
-        algos = fct_aux.ALGO_NAMES_DET + [fct_aux.ALGO_NAMES_LRIx["1"]]
+        algos = fct_aux.ALGO_NAMES_DET + [fct_aux.ALGO_NAMES_LRIx[1]]
         
         used_storage_det= True #False #True
         manual_debug = False #True #False #True
