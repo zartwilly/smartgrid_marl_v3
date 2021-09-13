@@ -2846,6 +2846,14 @@ if __name__ == "__main__":
                 "tests", 
                 phi_name + automate \
                     +"gamma_"+gamma_versions+"_T"+str(t_periods)+"_ksteps"+str(k_steps)+"_setACsetAB1B2C")
+    # A1B1Doc23gamma_V5_T20_ksteps2000_setACsetAB1B2C
+    t_periods = 20 #50 #20#50
+    k_steps = 2000 #250 #5
+    gamma_versions = "V5"
+    name_dir = os.path.join(
+                "tests", 
+                phi_name + automate \
+                    +"gamma_"+gamma_versions+"_T"+str(t_periods)+"_ksteps"+str(k_steps)+"_setACsetAB1B2C")
     
     nb_sub_dir = len(name_dir.split(os.sep))
     
@@ -2858,7 +2866,7 @@ if __name__ == "__main__":
                                   "LRI2": [0,1,2,3,4]}
         dico_SelectGammaVersion={"Selfish-DETERMINIST":[5], 
                                  "Systematic-DETERMINIST":[5],
-                                  "LRI1": [5], 
+                                  #"LRI1": [5], 
                                   "LRI2": [5]}
         tuple_paths, path_2_best_learning_steps \
             = get_tuple_paths_of_arrays_SelectGammaVersion(
