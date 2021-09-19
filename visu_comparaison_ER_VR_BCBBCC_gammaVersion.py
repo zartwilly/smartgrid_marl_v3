@@ -793,8 +793,8 @@ def get_df_ER_VR_EBsetA1B1_EBsetB2C_merge_all(tuple_paths,
     """
     merge various excel dataframes EB_R_EBsetA1B1_EBsetB2C
     """
-    dico_res_scen2, dico_res_scen3 = dict(), dict()
-    name_file = "EB_R_EBsetA1B1_EBsetB2C.xlsx"
+    dico_res_scen1, dico_res_scen2, dico_res_scen3 = dict(), dict(), dict()
+    name_file = "EB_R_EBsetA1B1_EBsetB2C_NEW.xlsx"#"EB_R_EBsetA1B1_EBsetB2C.xlsx"
     for tuple_path in tuple_paths:
         path_file = os.path.join(*tuple_path)
         df = pd.read_excel(os.path.join(path_file, name_file), index_col=0)
@@ -804,7 +804,12 @@ def get_df_ER_VR_EBsetA1B1_EBsetB2C_merge_all(tuple_paths,
         elif len(tuple_path) == 5:
             algo = tuple_path[-1]
         scenario = tuple_path[2].split("_")[-2]
-        if scenario == "scenario2":
+        if scenario == "scenario1":
+            dico = df.loc[:,"values"].to_dict()
+            dico["algo"] = algo
+            dico["scenario"] = scenario
+            dico_res_scen1[algo] = dico
+        elif scenario == "scenario2":
             dico = df.loc[:,"values"].to_dict()
             dico["algo"] = algo
             dico["scenario"] = scenario
@@ -814,7 +819,10 @@ def get_df_ER_VR_EBsetA1B1_EBsetB2C_merge_all(tuple_paths,
             dico["algo"] = algo
             dico["scenario"] = scenario
             dico_res_scen3[algo] = dico
-    
+        
+    dico_res_scen1['tau'] = {"EB_setA":np.nan,  "EB_setC":np.nan, 
+                             "ER":np.nan, "VR":np.nan, "algo":"tau", 
+                             "scenario":"scenario1"}
     dico_res_scen2['tau'] = {"EB_setA1B1":np.nan, "EB_setB2C":np.nan, 
                              "ER":np.nan, "VR":np.nan, "algo":"tau", 
                              "scenario":"scenario2"}
@@ -823,6 +831,7 @@ def get_df_ER_VR_EBsetA1B1_EBsetB2C_merge_all(tuple_paths,
                              "scenario":"scenario3"}
     
     
+    df_ER_VR_EBsetAC_scenario1 = pd.DataFrame(dico_res_scen1).T
     df_ER_VR_EBsetA1B1_EBsetB2C_scenario2 = pd.DataFrame(dico_res_scen2).T
     df_ER_VR_EBsetA1B1_EBsetB2C_scenario3 = pd.DataFrame(dico_res_scen3).T
     cols = ["EB_setA1B1", "EB_setB2C"]
@@ -834,8 +843,15 @@ def get_df_ER_VR_EBsetA1B1_EBsetB2C_merge_all(tuple_paths,
         df_ER_VR_EBsetA1B1_EBsetB2C_scenario3.loc["tau",col]  \
             = df_ER_VR_EBsetA1B1_EBsetB2C_scenario3.loc[fct_aux.ALGO_NAMES_DET[0],col] \
                 - df_ER_VR_EBsetA1B1_EBsetB2C_scenario3.loc["LRI2",col]
+                
+    cols = ["EB_setA","EB_setC"]
+    for col in cols:
+        df_ER_VR_EBsetAC_scenario1.loc["tau", col] \
+            = df_ER_VR_EBsetAC_scenario1.loc[fct_aux.ALGO_NAMES_DET[0],col] \
+                - df_ER_VR_EBsetAC_scenario1.loc["LRI2",col]
     
-    return df_ER_VR_EBsetA1B1_EBsetB2C_scenario2, \
+    return df_ER_VR_EBsetAC_scenario1, \
+            df_ER_VR_EBsetA1B1_EBsetB2C_scenario2, \
             df_ER_VR_EBsetA1B1_EBsetB2C_scenario3
 
 # _____________________________________________________________________________ 
@@ -2467,7 +2483,7 @@ def plot_evolution_players_by_situation_over_time(
 #
 #                           plot ER R TAU ---> debut
 # _____________________________________________________________________________
-def plot_bar_4_ER_VR_TAU(df_scenX):
+def OLD_plot_bar_4_ER_VR_TAU(df_scenX, dico_vars):
     data = {"algo": df_scenX["algo"].values.tolist(), 
             "EB_setA1B1": df_scenX["EB_setA1B1"].values.tolist(),
             "EB_setB2C": df_scenX["EB_setB2C"].values.tolist(),
@@ -2512,20 +2528,91 @@ def plot_bar_4_ER_VR_TAU(df_scenX):
     
     return px
 
-def plot_ER_VR_TAU(df_ER_VR_EBsetA1B1_EBsetB2C_scenario2, 
+def plot_bar_4_ER_VR_TAU(df_scenX, libelles):
+    """
+    libelles = ["EB_setA1B1", "EB_setB2C", "ER", "VR"] ou
+                ["EB_setA", "EB_setC", "ER", "VR"]
+
+    Parameters
+    ----------
+    df_scenX : Dataframes
+        DESCRIPTION.
+    libelles : list
+        DESCRIPTION.
+
+    Returns
+    -------
+    px : TYPE
+        DESCRIPTION.
+
+    """
+    data = {"algo": df_scenX["algo"].values.tolist(), 
+            libelles[0]: df_scenX[libelles[0]].values.tolist(),
+            libelles[1]: df_scenX[libelles[1]].values.tolist(),
+            libelles[2]: df_scenX[libelles[2]].values.tolist(),
+            libelles[3]: df_scenX[libelles[3]].values.tolist()}
+    cols = libelles # ["EB_setA1B1", "EB_setB2C", "ER", "VR"]
+    algos = df_scenX["algo"].values.tolist()
+    
+    x = [ (algo, col) for algo in algos for col in cols ]
+    counts = sum(zip(data[libelles[0]], data[libelles[1]], 
+                     data[libelles[2]], data[libelles[3]]), ()) # like an hstack
+
+    x = x[:-2]; counts = counts[:-2]
+    source = ColumnDataSource(data=dict(x=x, counts=counts))
+    
+    TOOLS[7] = HoverTool(tooltips=[
+                            ("value", "@counts")
+                            ]
+                        )
+
+    px = figure(x_range=FactorRange(*x), 
+                plot_height=350, plot_width = int(WIDTH*MULT_WIDTH),
+                toolbar_location=None, tools=TOOLS)
+    
+    width = 0.6
+    px.vbar(x='x', top='counts', width=width, source=source, line_color="white",
+            fill_color=factor_cmap('x', palette=Category20[20], 
+                                   factors=cols, start=1, end=2))
+
+    title = "{}: ER, VR, Tau".format(df_scenX.scenario.unique().tolist()[0])
+    px.title.text = title
+    
+    min_val = df_scenX[libelles].min().min()
+    px.y_range.start = min_val-1 if  min_val < 0 else 0
+    px.x_range.range_padding = width
+    px.xgrid.grid_line_color = None
+    px.legend.location = "top_right" #"top_left"
+    px.legend.orientation = "horizontal"
+    px.xaxis.axis_label = "algo"
+    px.yaxis.axis_label = "values"
+    import math
+    px.xaxis.major_label_orientation = math.pi/6    
+    
+    return px
+
+def plot_ER_VR_TAU(df_ER_VR_EBsetAC_scenario1,
+                   df_ER_VR_EBsetA1B1_EBsetB2C_scenario2, 
                    df_ER_VR_EBsetA1B1_EBsetB2C_scenario3):
+    df_scen1 = df_ER_VR_EBsetAC_scenario1
     df_scen2 = df_ER_VR_EBsetA1B1_EBsetB2C_scenario2
     df_scen3 = df_ER_VR_EBsetA1B1_EBsetB2C_scenario3
     
-    px_scen2 = plot_bar_4_ER_VR_TAU(df_scen2)
-    px_scen3 = plot_bar_4_ER_VR_TAU(df_scen3)
+    libelles = ['EB_setA', 'EB_setC', 'ER', 'VR']
+    px_scen1 = plot_bar_4_ER_VR_TAU(df_scen1, libelles)
     
+    libelles = ['EB_setA1B1', 'EB_setB2C', 'ER', 'VR']
+    px_scen2 = plot_bar_4_ER_VR_TAU(df_scen2, libelles)
+    px_scen3 = plot_bar_4_ER_VR_TAU(df_scen3, libelles)
+    
+    px_scen1.legend.click_policy="hide"
     px_scen2.legend.click_policy="hide"
     px_scen3.legend.click_policy="hide"
     
+    col_px_scen1 = column(px_scen1)
     col_px_scen2 = column(px_scen2)
     col_px_scen3 = column(px_scen3)
-    rows_ER_VR_TAU = [col_px_scen2, col_px_scen3]
+    rows_ER_VR_TAU = [col_px_scen1, col_px_scen2, col_px_scen3]
     rows_ER_VR_TAU = column(children=rows_ER_VR_TAU, 
                             sizing_mode='stretch_both')
     
@@ -2542,6 +2629,7 @@ def plot_ER_VR_TAU(df_ER_VR_EBsetA1B1_EBsetB2C_scenario2,
 # _____________________________________________________________________________
 def group_plot_on_panel(df_B_C_BB_CC_ER_M, 
                         df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T,
+                        df_ER_VR_EBsetAC_scenario1,
                         df_ER_VR_EBsetA1B1_EBsetB2C_scenario2,
                         df_ER_VR_EBsetA1B1_EBsetB2C_scenario3, 
                         algos_to_show, 
@@ -2564,6 +2652,10 @@ def group_plot_on_panel(df_B_C_BB_CC_ER_M,
             = df_ER_VR_EBsetA1B1_EBsetB2C_scenario2[col].astype(float)
         df_ER_VR_EBsetA1B1_EBsetB2C_scenario3[col] \
             = df_ER_VR_EBsetA1B1_EBsetB2C_scenario3[col].astype(float)
+    cols = ["EB_setA", "EB_setC", "ER", "VR"]
+    for col in cols:
+        df_ER_VR_EBsetAC_scenario1[col] \
+            = df_ER_VR_EBsetAC_scenario1[col].astype(float)
     
     
     rows_EB_C_B_CC_BB = plot_comparaison_gamma_version_all_scenarios(
@@ -2582,7 +2674,8 @@ def group_plot_on_panel(df_B_C_BB_CC_ER_M,
                                     title="comparison Gamma_version B,C")
     print("comparison Gamma_version B,C : Terminee")
     
-    rows_ER_VR_TAU = plot_ER_VR_TAU(df_ER_VR_EBsetA1B1_EBsetB2C_scenario2, 
+    rows_ER_VR_TAU = plot_ER_VR_TAU(df_ER_VR_EBsetAC_scenario1,
+                                    df_ER_VR_EBsetA1B1_EBsetB2C_scenario2, 
                                     df_ER_VR_EBsetA1B1_EBsetB2C_scenario3
                                     )
     tabs_ER_VR_TAU = Panel(child=rows_ER_VR_TAU, 
@@ -2886,11 +2979,12 @@ if __name__ == "__main__":
     print("get_k_stop_4_periods: TERMINE") 
     
     tuple_paths = list(set(tuple_paths))
+    df_ER_VR_EBsetAC_scenario1, \
     df_ER_VR_EBsetA1B1_EBsetB2C_scenario2, \
     df_ER_VR_EBsetA1B1_EBsetB2C_scenario3 \
         = get_df_ER_VR_EBsetA1B1_EBsetB2C_merge_all(
             tuple_paths=tuple_paths, 
-            scenarios=["scenario2", "scenario3"])
+            scenarios=["scenario1","scenario2", "scenario3"])
     
     # DBG_EB_R_TAU_on_panel(df_EB_R_EBsetA1B1_EBsetB2C_scenario1, \
     #                       df_EB_R_EBsetA1B1_EBsetB2C_scenario2)
@@ -2922,6 +3016,7 @@ if __name__ == "__main__":
     group_plot_on_panel(
         df_B_C_BB_CC_ER_M=df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T, 
         df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T=df_B_C_BB_CC_ER_CONS_PROD_b0_c0_pisg_M_T,
+        df_ER_VR_EBsetAC_scenario1=df_ER_VR_EBsetAC_scenario1,
         df_ER_VR_EBsetA1B1_EBsetB2C_scenario2=df_ER_VR_EBsetA1B1_EBsetB2C_scenario2,
         df_ER_VR_EBsetA1B1_EBsetB2C_scenario3=df_ER_VR_EBsetA1B1_EBsetB2C_scenario3, 
         algos_to_show=algos_to_show,
