@@ -460,13 +460,22 @@ def determinist_balanced_player_game(arr_pl_M_T_vars_init,
                 pi_0_minus_T=pi_0_minus_T, pi_0_plus_T=pi_0_plus_T,
                 b0_s_T=b0_s_T, c0_s_T=c0_s_T)
     
+    V_is_M_T = BENs_M_T - CSTs_M_T
+    
+    APerf = 0
+    for t in range(0, t_periods):
+        V_is_M = V_is_M_T[:, t]
+        Aperf_t = np.sum(V_is_M, axis=0)
+        APerf += Aperf_t
+    APerf = round(APerf/t_periods, 5)
+    
     VR = np.sum(np.sum( B_is_MT - C_is_MT, axis=0), axis=0)
     ER = np.sum(EB_is_M, axis=0)
     
     dico_EB_R_EBsetA1B1_EBsetB2C = {"EB_setA1B1":[np.nan],"EB_setB2C":[np.nan], 
                                     "ER":[np.nan], "VR":[np.nan]}
     set_Mplayers = np.unique(arr_pl_M_T_vars_modif[:, 0, fct_aux.AUTOMATE_INDEX_ATTRS['set']]).tolist()
-    if set(set_Mplayers).intersection(fct_aux.SET_AB1B2C) == set(fct_aux.SET_AB1B2C):
+    if set(set_Mplayers) == set(fct_aux.SET_AB1B2C):
         setA1B1, setB2C = list(), list()
         setA1B1 \
             = np.argwhere(
@@ -482,7 +491,26 @@ def determinist_balanced_player_game(arr_pl_M_T_vars_init,
         EB_setB2C_det = np.sum(EB_is_M[setB2C], axis=0)
         dico_EB_R_EBsetA1B1_EBsetB2C = {"EB_setA1B1":[EB_setA1B1_det], 
                                          "EB_setB2C":[EB_setB2C_det], 
-                                         "ER":[ER], "VR":[VR]}
+                                         "ER":[ER], "VR":[VR], 
+                                         "APerf":[APerf]}
+    elif set(set_Mplayers) == set(fct_aux.SET_AC):
+        setA_idplayers \
+            = np.argwhere(
+                (arr_pl_M_T_K_vars_modif[:, 0, fct_aux.AUTOMATE_INDEX_ATTRS['set']] == "setA")
+                ).reshape(-1).tolist()
+        setC_idplayers \
+            = np.argwhere(
+                (arr_pl_M_T_K_vars_modif[:, 0, fct_aux.AUTOMATE_INDEX_ATTRS['set']] == "setC")
+                ).reshape(-1).tolist()
+        
+        EB_setA_det = np.sum(EB_is_M[setA_idplayers], axis=0)
+        EB_setC_det = np.sum(EB_is_M[setC_idplayers], axis=0)
+        dico_EB_R_EBsetA_EBsetC = {"EB_setA":[EB_setA_det], 
+                                   "EB_setC":[EB_setC_det], 
+                                   "ER":[ER], "VR":[VR], 
+                                   "APerf":[APerf]}
+        dico_EB_R_EBsetA1B1_EBsetB2C = dico_EB_R_EBsetA_EBsetC.copy()
+        
     #__________      save computed variables locally      _____________________ 
     Path(path_to_save).mkdir(parents=True, exist_ok=True)
     df_nash.to_excel(os.path.join(
