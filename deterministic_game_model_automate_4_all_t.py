@@ -496,11 +496,11 @@ def determinist_balanced_player_game(arr_pl_M_T_vars_init,
     elif set(set_Mplayers) == set(fct_aux.SET_AC):
         setA_idplayers \
             = np.argwhere(
-                (arr_pl_M_T_K_vars_modif[:, 0, fct_aux.AUTOMATE_INDEX_ATTRS['set']] == "setA")
+                (arr_pl_M_T_vars_modif[:, 0, fct_aux.AUTOMATE_INDEX_ATTRS['set']] == "setA")
                 ).reshape(-1).tolist()
         setC_idplayers \
             = np.argwhere(
-                (arr_pl_M_T_K_vars_modif[:, 0, fct_aux.AUTOMATE_INDEX_ATTRS['set']] == "setC")
+                (arr_pl_M_T_vars_modif[:, 0, fct_aux.AUTOMATE_INDEX_ATTRS['set']] == "setC")
                 ).reshape(-1).tolist()
         
         EB_setA_det = np.sum(EB_is_M[setA_idplayers], axis=0)
